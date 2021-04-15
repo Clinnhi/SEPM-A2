@@ -1,0 +1,16 @@
+.buttongroup-topmargin {
+    margin-top: 5%;
+  }
+
+.createshift-btn{
+    margin-bottom: 60%;
+    /* margin-right: 20%; */
+    margin-right: 20%;
+    
+}
+
+.bottomright {
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+  }

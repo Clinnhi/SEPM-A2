@@ -5,7 +5,11 @@ $dbUsername = "root";
 $dbPassword = "";
 $dbName = "SEPM";
 
+<<<<<<< HEAD
 if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !empty($_POST['employeePhoneNo']) && !empty($_POST['employeeFullName']) && !empty($_POST['employeeAddress'])) {
+=======
+if ($_POST['employeeEmail'] && $_POST['employeePassword'] && $_POST['employeePhoneNo'] && $_POST['employeeFullName'] && $_POST['employeeAddress']) {
+>>>>>>> 4ad1873fa6e2e78e7e3d3207811b53164f44c746
   $email = $_POST['employeeEmail'];
   $password = $_POST['employeePassword'];
   $phone_number = $_POST['employeePhoneNo'];
@@ -64,7 +68,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
       <a class="nav-link" href="#">Menu Item</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Add New Employee</a>
+      <a class="nav-link active" href="./addemployee.php">Add New Employee</a>
     </li>
     <div class="position-absolute top-0 end-0">
       <button class="btn btn-primary" type="button">Logout</button>
@@ -92,7 +96,11 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Date Of Birth</label>
+<<<<<<< HEAD
           <input type="date" class="form-control" name="employeeDOB" value="2021-06-01">
+=======
+          <input type="text" class="form-control" name="employeeDOB" value="2017-06-01">
+>>>>>>> 4ad1873fa6e2e78e7e3d3207811b53164f44c746
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Full Name</label>

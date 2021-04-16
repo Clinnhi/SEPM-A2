@@ -18,10 +18,10 @@
   <!-- Nav Bar -->
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="/addshifts.html">Home</a>
+      <a class="nav-link active" aria-current="page" href="./mainmenu.html">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="/addshifts.html">Shifts</a>
+      <a class="nav-link" aria-current="page" href="./addshifts.html">Shifts</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/menu1.html">Menu Item</a>

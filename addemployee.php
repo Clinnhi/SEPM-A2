@@ -64,7 +64,7 @@ if ($_POST['employeeEmail'] && $_POST['employeePassword'] && $_POST['employeePho
       <a class="nav-link" href="#">Menu Item</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Add New Employee</a>
+      <a class="nav-link active" href="./addemployee.php">Add New Employee</a>
     </li>
     <div class="position-absolute top-0 end-0">
       <button class="btn btn-primary" type="button">Logout</button>

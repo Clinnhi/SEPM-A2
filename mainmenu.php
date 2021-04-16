@@ -24,10 +24,10 @@
       <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/menu1.html">Menu Item</a>
+      <a class="nav-link" href="/menu1.php">Menu Item</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/menu2.html">Menu Item</a>
+      <a class="nav-link" href="/menu2.php">Menu Item</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Menu Item</a>

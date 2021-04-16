@@ -16,7 +16,7 @@
     <!-- Nav Bar -->
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="./mainmenu.html">Home</a>
+            <a class="nav-link" aria-current="page" href="./mainmenu.php">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Shifts</a>
@@ -31,7 +31,7 @@
             <a class="nav-link" href="#">Menu Item</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./addemployee.html">Add New Employee</a>
+            <a class="nav-link" href="./addemployee.php">Add New Employee</a>
         </li>
         <div class="position-absolute top-0 end-0">
             <button class="btn btn-primary" type="button">Logout</button>

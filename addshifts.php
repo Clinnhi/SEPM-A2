@@ -55,7 +55,7 @@ if (!$sql->execute()) {
             <a class="nav-link active" aria-current="page" href="#">Shifts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./notification.html">Notification</a>
+            <a class="nav-link" href="./notification.php">Notification</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Menu Item</a>

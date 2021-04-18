@@ -55,7 +55,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
       <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="./notification.html">Notification</a>
+      <a class="nav-link" href="./notification.php">Notification</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/menu2.html">Menu Item</a>

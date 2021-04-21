@@ -24,7 +24,7 @@
       <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/menu1.php">Menu Item</a>
+      <a class="nav-link" href="./notification.php">Notification</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/menu2.php">Menu Item</a>

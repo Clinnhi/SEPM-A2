@@ -1,10 +1,10 @@
 <?php
+session_start();
 
 $host = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
 $dbName = "SEPM";
-
 
 $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 if ($connection->connect_errno) {
@@ -19,8 +19,6 @@ if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location'
     $location = $_POST['location'];
     $employee = $_POST['employee'][0];
     
-
-
 $sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `employee_id`) VALUES (?, ?, ?, ?)");
 $sql->bind_param('sssi',$date, $time, $location, $employee);
 if (!$sql->execute()) {
@@ -46,30 +44,7 @@ if (!$sql->execute()) {
 </head>
 
 <body>
-    <!-- Nav Bar -->
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="./mainmenu.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Shifts</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Menu Item</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Menu Item</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Menu Item</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="./addemployee.php">Add New Employee</a>
-        </li>
-        <div class="position-absolute top-0 end-0">
-            <button class="btn btn-primary" type="button">Logout</button>
-        </div>
-    </ul>
+<?php include 'header.php';?>
 
     <!-- Date/Time/Location -->
     <form method="post" action="">

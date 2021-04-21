@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $host = "localhost";
 $dbUsername = "root";
@@ -46,30 +47,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
 
 <body>
 
-  <!-- Nav Bar -->
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="./mainmenu.php">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="./notification.php">Notification</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/menu2.html">Menu Item</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Menu Item</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Add New Employee</a>
-    </li>
-    <div class="position-absolute top-0 end-0">
-      <button class="btn btn-primary" type="button">Logout</button>
-    </div>
-  </ul>
+<?php include 'header.php';?>
 
 
   <div class="container">

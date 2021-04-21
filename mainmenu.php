@@ -39,6 +39,28 @@
       <button class="btn btn-primary" type="button">Logout</button>
     </div>
   </ul>
+  
+  <h1>SEPM - B4-3</h1>
+  <p1>s3742332 - Harris Charalambous<br>
+      s3605044 - Clinton Pham<br>
+      s3679150 - Ruiyang Fu<br>
+      s3568825 - Haiyu Li<br>
+      s3705847 - Ziyuan Wang<br>
+      s3573783 - Shengzheng Ye<br>
+      s3749868 - Jordan Nguyen<br>
+    </p1><br>
+
+  <p1>
+    The purpose of this project is to build a tool for management of working shifts of the staff.
+    It Provides an effective way for shift managers and employees and meets the requirements of their work.
+  </p1>
+
+
+  <footer>
+      <hr>
+            <!-- Prints out the footer for the webpages -->
+            &copy; SEPM Group B4-3 2021
+  </footer>
 
 
 

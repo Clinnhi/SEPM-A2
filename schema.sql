@@ -9,7 +9,7 @@ CREATE TABLE `Employee` (
   `phone_number` varchar(14) NOT NULL,
   `dob` date NOT NULL,
   `name` varchar(70) NOT NULL,
-  `address` varchar(100) NOT NULL
+  `address` varchar(100) NOT NULL,
   `is_manager` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -25,7 +25,7 @@ CREATE TABLE `Shifts` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `location` varchar(100) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `employee_id` int(11) NOT NULL,
   `accepted` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

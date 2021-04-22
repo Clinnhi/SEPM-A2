@@ -10,6 +10,7 @@ CREATE TABLE `Employee` (
   `dob` date NOT NULL,
   `name` varchar(70) NOT NULL,
   `address` varchar(100) NOT NULL
+  `is_manager` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `Employee`
@@ -25,6 +26,7 @@ CREATE TABLE `Shifts` (
   `time` time NOT NULL,
   `location` varchar(100) NOT NULL,
   `employee_id` int(11) NOT NULL
+  `accepted` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `Shifts`
@@ -37,3 +39,5 @@ ALTER TABLE `Shifts`
 ALTER TABLE `Shifts`
   ADD CONSTRAINT `shifts_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
 COMMIT;
+
+INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '0');

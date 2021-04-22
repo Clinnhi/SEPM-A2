@@ -1,5 +1,18 @@
 <?php
 session_start();
+$host = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "SEPM";
+
+$user = $_SESSION['id'];
+$connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+if ($connection->connect_errno) {
+    echo "Failed to connect to MySQL: " . $connection->connect_error;
+    exit();
+}
+
+$result = $connection->query("SELECT * FROM `Shifts` WHERE `employee_id` = '$user' AND `accepted` = 1");
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +33,33 @@ session_start();
 <body>
 
 <?php include 'header.php';?>
+
+<div class="container">
+        <div class="margin-top5">
+            <h5>Accepted Shifts</h5>
+            <?php
+                if ($result->num_rows > 0) {
+                    foreach($result as $shift){
+                        ?>
+            <div class="list-group margin-top3">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <p class="mb-1">&nbsp;&nbsp;A shift has been allocated to you</p>
+                    <p class="mb-1">【TIME】<?= $shift['time'] ?></p>
+                    <p class="mb-1">【DATE】<?= $shift['date'] ?></p>
+                    <p class="mb-1">【Location】<?= $shift['location'] ?></p>
+                    <div class="d-flex flex-row-reverse">
+                    </div>
+                </a>
+            </div>
+            <?php
+                    }
+                }
+                else {
+                    echo "No New Shifts";
+                }
+                ?>
+        </div>
+    </div>
  
 
 
@@ -28,7 +68,6 @@ session_start();
             <!-- Prints out the footer for the webpages -->
             &copy; SEPM Group B4-3 2021
   </footer>
-
 
 
 </body>

@@ -13,6 +13,8 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
   $dob = $_POST['employeeDOB'];
   $name = $_POST['employeeFullName'];
   $address = $_POST['employeeAddress'];
+  var_dump($_POST['optradio']);
+  $management = $_POST['optradio'] == 'manager' ? 1 : 0;
 
   $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
   if ($connection->connect_errno) {
@@ -20,8 +22,8 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
     exit();
   }
 
-  $sql = $connection->prepare("INSERT INTO `Employee` (`email`, `password`, `phone_number`, `dob`, `name`, `address`) VALUES (?, ?, ?, ?, ?, ?)");
-  $sql->bind_param('ssssss', $email, $password, $phone_number, $dob, $name, $address);
+  $sql = $connection->prepare("INSERT INTO `Employee` (`email`, `password`, `phone_number`, `dob`, `name`, `address`, `management`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+  $sql->bind_param('ssssssi', $email, $password, $phone_number, $dob, $name, $address, $management);
 
   if (!$sql->execute()) {
     echo $sql->error;
@@ -80,14 +82,14 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
           <input type="text" class="form-control" name="employeeAddress">
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="optradio" id="shiftManagerOption" checked  >
+          <input class="form-check-input" type="radio" name="optradio" id="shiftManagerOption" value="manager" checked  >
           <label class="form-check-label" for="shiftManagerOption">
             Shift Manager
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="optradio" id="staffUserOption">
-          <label class="form-check-label" for="staffUserOption">
+          <input class="form-check-input" type="radio" name="optradio" id="staffUserOption" value="staff">
+          <label class="form-check-label" for="staffUserOption" >
             Staff User
           </label>
         </div>

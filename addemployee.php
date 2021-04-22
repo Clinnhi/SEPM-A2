@@ -13,7 +13,6 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
   $dob = $_POST['employeeDOB'];
   $name = $_POST['employeeFullName'];
   $address = $_POST['employeeAddress'];
-  var_dump($_POST['optradio']);
   $management = $_POST['optradio'] == 'manager' ? 1 : 0;
 
   $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);

@@ -98,7 +98,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
 
   <div class="container">
     <div class="bottomright">
-      <button type="submit" class="btn btn-primary">Add New Account </button>
+      <button type="submit" class="btn btn-primary">Add New Account</button>
     </div>
   </div>
 

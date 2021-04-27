@@ -19,7 +19,7 @@ if(!empty($_POST['logout']))
         <a class="nav-link" href="./notification.php">Notification</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/menu2.php">Menu Item</a>
+        <a class="nav-link" href="./changeavailability.php">Change Availability</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="./allocateshifts.php">Allocate Shifts</a>

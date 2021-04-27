@@ -51,7 +51,7 @@
         <br><br>
 
         <input  type="date" name="txt" id="value" onchange="myFunction(value)" min="<?= date('Y-m-d'); ?>">
-        <button class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">submit</button>
+        <button class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">Confirm</button>
 
         <!-- <p id="test"></p> -->
 

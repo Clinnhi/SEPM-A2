@@ -11,7 +11,7 @@ if ($connection->connect_errno) {
     echo "Failed to connect to MySQL: " . $connection->connect_error;
     exit();
 }
-echo $_POST['date'];
+
 if (!empty($_POST['date'])){
     //Convert date to format accepted by database
     $date = str_replace('/', '-', $_POST['date']);

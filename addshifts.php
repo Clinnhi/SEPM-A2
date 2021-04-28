@@ -14,7 +14,7 @@ if ($connection->connect_errno) {
 $results = $connection->query("SELECT id, name FROM `Employee`");
 
 if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location']) && !empty($_POST['employee'])) {
-    $date = $_POST['date'];
+    $date = str_replace('/', '-', $_POST['date']);
     $time = $_POST['time'];
     $location = $_POST['location'];
     $employee = $_POST['employee'][0];
@@ -55,7 +55,7 @@ if (!$sql->execute()) {
                 </center>
                 <div class="row g-3">
                     <div class="col-sm">
-                        <input type="text" class="form-control" placeholder="Shift Date" aria-label="State" name="date" value="2021-06-01">
+                        <input type="date" class="form-control" placeholder="Shift Date" aria-label="Date" name="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
                     </div>
                     <div class="col-sm">
                         <input type="text" class="form-control" placeholder="Shift Time" aria-label="Shift Time"

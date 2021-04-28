@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+$host = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "SEPM";
+
+$connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+if ($connection->connect_errno) {
+    echo "Failed to connect to MySQL: " . $connection->connect_error;
+    exit();
+}
+echo $_POST['date'];
+if (!empty($_POST['date'])){
+    //Convert date to format accepted by database
+    $date = str_replace('/', '-', $_POST['date']);
+    echo $date;
+    
+    $sql = $connection->prepare("INSERT INTO `Unavailabilities` (`date`, `employee_id`) VALUES (?, ?)");
+    $sql->bind_param('ss',$date, $_SESSION['id']);
+    if (!$sql->execute()) {
+        echo $sql->error;
+    }
+    $sql->close();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,26 +46,8 @@
 </head>
 
 <script>
-    var a;
-
-     
-
-    function myFunction(val) {
-        a = val.split("-").reverse().join("/");
-        
-        // This will display the date in dd/mm/yyyy
-        // document.getElementById("test").innerHTML = a
-
-
-    }
-
     function confirmBtn() {
-        document.getElementById("result").innerHTML = a;
-        var z = a.split("-").reverse().join("/");
-        document.getElementById("value").type = "date";
-        document.getElementById("value").value = z;
-        // document.getElementById("result").innerHTML = "You have successfully taken the following date off: " + z;
-        alert("You have successfully taken the following date off: " + z);
+        alert("You have successfully taken the following date off: " + document.getElementById('date').value);
     }
 </script>
 
@@ -50,8 +61,8 @@
         <h3>Please indicate which day you are unavailable</h3>  
         <br><br>
 
-        <input  type="date" name="txt" id="value" onchange="myFunction(value)" min="<?= date('Y-m-d'); ?>">
-        <button class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">Confirm</button>
+        <input type="date" name="date" id="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
+        <button type="submit" class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">Confirm</button>
 
         <!-- <p id="test"></p> -->
 

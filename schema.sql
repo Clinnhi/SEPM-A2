@@ -40,4 +40,21 @@ ALTER TABLE `Shifts`
   ADD CONSTRAINT `shifts_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
 COMMIT;
 
+CREATE TABLE `Unavailabilities` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `employee_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `Unavailabilities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employee_id` (`employee_id`);
+
+ALTER TABLE `Unavailabilities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+ALTER TABLE `Unavailabilities`
+  ADD CONSTRAINT `unavailabilities_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
+COMMIT;
+
 INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '0');

@@ -27,6 +27,7 @@ if (!empty($_POST['inputEmail']) && !empty($_POST['inputPassword'])) {
         $_SESSION["username"] = $username;
         $_SESSION["name"] = $employeeIndex['name'];
         $_SESSION["id"] = $employeeIndex['id'];
+        $_SESSION["is_manager"] = $employeeIndex['is_manager'];
         header("Location: ./mainmenu.php");
     } else {
         $hasError = true;

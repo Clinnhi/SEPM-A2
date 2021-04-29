@@ -1,6 +1,6 @@
 <?php
-if(!empty($_POST['logout']))
-{
+session_start();
+if (!empty($_POST['logout'])) {
     session_unset();
     session_destroy();
     header("Location: ./loginpage.php");
@@ -12,20 +12,28 @@ if(!empty($_POST['logout']))
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="./mainmenu.php">Home</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
-    </li>
+    <?php
+    if ($_SESSION["is_manager"] == 1) {
+    ?>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="./addemployee.php">Add New Employee</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="./allocateshifts.php">Allocate Shifts</a>
+        </li>
+    <?php
+    }
+    ?>
     <li class="nav-item">
         <a class="nav-link" href="./notification.php">Notification</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="./changeavailability.php">Change Availability</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="./allocateshifts.php">Allocate Shifts</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="./addemployee.php">Add New Employee</a>
     </li>
     <form method="post" action="">
         <div class="position-absolute top-0 end-0">

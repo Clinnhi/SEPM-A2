@@ -26,6 +26,10 @@ if (!empty($_POST['logout'])) {
         <li class="nav-item">
             <a class="nav-link" href="./allocateshifts.php">Allocate Shifts</a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="./viewAndDeactivate.php">Employee List</a>
+        </li>
     <?php
     }
     ?>
@@ -35,6 +39,7 @@ if (!empty($_POST['logout'])) {
     <li class="nav-item">
         <a class="nav-link" href="./changeavailability.php">Change Availability</a>
     </li>
+
     <form method="post" action="">
         <div class="position-absolute top-0 end-0">
             Welcome, <?= $_SESSION['name'] ?>

@@ -1,3 +1,30 @@
+<?php
+session_start();
+
+$host = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "SEPM";
+
+$connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+if ($connection->connect_errno) {
+    echo "Failed to connect to MySQL: " . $connection->connect_error;
+    exit();
+}
+
+$results = $connection->query("SELECT id, name FROM `Employee`");
+
+if (isset($_POST['deactivate'])) {
+    $deactivate = $_POST['deactivate'];
+    $sql = "DELETE FROM `Employee` WHERE id = $deactivate";
+    if ($connection->query($sql) == true) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . $connection->error;
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,41 +44,33 @@
 
     <?php include 'header.php'; ?>
 
-    <div class="container margin-top">
-        <h3 style="text-align: center">Employee List</h3><br><br>
-        <ul class="list-group">
+    <form method="post" action="">
+        <div class="container margin-top">
+            <h3 style="text-align: center">Employee List</h3><br><br>
+            <ul class="list-group">
+                <?php
+                if ($results->num_rows > 0) {
+                    foreach ($results as $employee) {
+                ?>
+                        <li class="list-group-item"><?= $employee['name'] ?> <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-dark" name="view" value="<?=$employee['id']?>">View Profile</button>
+                                <button type="submit" class="btn btn-secondary" name="edit" value="<?=$employee['id']?>">Edit Profile</button>
+                                <button type="submit" class="btn btn-primary" name="deactivate" value="<?=$employee['id']?>">Deactivate Account</button>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <h2>There are no employees! Hire someone!!!</h2>
+                <?php
+                }
+                ?>
 
-            <li class="list-group-item">Employee 1 <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-dark">View Profile</button>
-                    <button type="button" class="btn btn-secondary">Edit Profile</button>
-                    <button type="button" class="btn btn-primary">Deactivate Account</button>
-                </div>
-            </li>
+            </ul>
 
-
-            <li class="list-group-item">Employee 2 <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-dark">View Profile</button>
-                    <button type="button" class="btn btn-secondary">Edit Profile</button>
-                    <button type="button" class="btn btn-primary">Deactivate Account</button>
-                </div>
-            </li>
-
-            <li class="list-group-item">Employee 3 <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-dark">View Profile</button>
-                    <button type="button" class="btn btn-secondary">Edit Profile</button>
-                    <button type="button" class="btn btn-primary">Deactivate Account</button>
-                </div>
-            </li>
-
-            <li class="list-group-item">Employee 4 <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-dark">View Profile</button>
-                    <button type="button" class="btn btn-secondary">Edit Profile</button>
-                    <button type="button" class="btn btn-primary">Deactivate Account</button>
-                </div>
-            </li>
-        </ul>
-
-    </div>
+        </div>
+    </form>
 
 </body>
 

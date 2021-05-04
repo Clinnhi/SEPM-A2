@@ -31,7 +31,7 @@ if (!empty($_POST['logout'])) {
             <a class="nav-link" href="./viewAndDeactivate.php">Employee List</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./changehours.php">Change Availability Hours</a>
+            <a class="nav-link" href="./changehours.php">Change Weekly Limit</a>
         </li>
     <?php
     }

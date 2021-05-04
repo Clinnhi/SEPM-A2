@@ -85,15 +85,36 @@ if ($connection->connect_errno) {
 
             <div class="container">
                 <br><br><br>
-                <button type="submit" class="btn btn-primary btn-lg">Increase Limit</button>
+                <!-- <button type="submit" class="btn btn-primary btn-lg">Increase Limit</button> -->
+                <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Increase Limit
+                </button>
+
+
                 <!-- Code to check if staff is eligible to have their hourly limits increased -->
-                <!-- If they are --> 
+                <!-- If they are -->
                 <div class="alert alert-danger" role="alert">
                     This staff is not eligible to have his/her hours increased.
                 </div>
                 <!-- else -->
                 <div class="alert alert-success" role="alert">
                     This staff working limit has been successfully increased.
+                </div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        Please confirm whether this staff is eligible to have this increase
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+$host = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "SEPM";
+
+$connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+if ($connection->connect_errno) {
+    echo "Failed to connect to MySQL: " . $connection->connect_error;
+    exit();
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,15 +35,30 @@
 
     <div class="container" style="text-align: center;">
         <div class="margin-top">
-            <select name="shiftList">
-                <option value="">Shift 1</option>
-                <option value="">Shift 2</option>
-                <option value="">Shift 3</option>
-                <option value="">Shift 4</option>
+            <select name="shiftList" onchange="changeShift(this)">
+                <option></option>
+                <?php
+                //Get shifts information according to the passed parameter id
+                $id = intval($_GET['id']);
+                if (isset($_GET['id'])){
+                    $id = 0;
+                }
+
+                $shifts = $connection->query("select shift_id,location from shifts")->fetch_all();
+                foreach ($shifts as $shift){
+                    //output data to the website
+                    if ($shift[0] == $id){
+                        echo "<option value='$shift[0]' selected>$shift[1]</option>";
+                    } else{
+                        echo "<option value='$shift[0]'>$shift[1]</option>";
+                    }
+                }
+                ?>
+
             </select>
         </div>
     </div>
-
+<form action="" method="post">
     <div class="mt-5">
         <div class="container">
 
@@ -36,19 +69,22 @@
                         <div style="text-align: center;">
                             <h3>Staff Currently Roastered</h3>
                         </div>
+                        <?php
+                        //find the shift who accepted=1 from shift table
+                        $employees = $connection
+                            ->query("select name from employee where id in (select employee_id from shifts where shift_id=$id and accepted=1)")
+                            ->fetch_all();
+                        foreach ($employees as $employee) {
+                            ?>
+                            <div class="p-4 bg-light border">
+                                <!-- Employee name here  -->
+                                <?= $employee[0] ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
 
-                        <div class="p-4 bg-light border">
-                            <!-- Employee name here  --> Jarrod Sample
-                        </div>
-                        <div class="p-4 bg-light border"> Sample Tom
-                            <!-- Employee name here  -->
-                        </div>
-                        <div class="p-4 bg-light border"> Thomas Blackburn
-                            <!-- Employee name here  -->
-                        </div>
-                        <div class="p-4 bg-light border"> Clinton Roaster
-                            <!-- Employee name here  -->
-                        </div>
+                        ?>
 
 
                     </div>
@@ -56,30 +92,25 @@
                         <div style="text-align: center;">
                             <h3>Add Employees To Shift</h3>
                         </div>
-
-
                         <div class="form-check" style="text-align: center;">
-                            <div class="p-4 border bg-light"> <input class="form-check-input" type="checkbox" value="" >
-                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                    <!-- Employee Name -->
-                                    Sample Jarros
-                                </label>
-                            </div>
-                            <div class="p-4 border bg-light"> <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                    Blackburn Hawk
+                            
+                            <?php
+                            //find the employee who accepted=0 or null from shift table
+                            $employees = $connection
+                                ->query("select id,name from employee where id not in (select employee_id from shifts where shift_id=$id and accepted=1)")
+                                ->fetch_all();
+                                foreach ($employees as $employee){
+                                    //output data to the website
+                                    ?>
+                                    <div class="p-4 border bg-light"><input class="form-check-input" type="checkbox" name="employee[]" value="<?= $employee[0] ?>" id="check<?= $employee[0] ?>">
+                                    <label class="form-check-label" for="check<?= $employee[0] ?>">
+                                        <?= $employee[1] ?>
+                                    </label>
+                                </div>
+                                <?php
+                                }
 
-                                </label>
-                            </div>
-                            <div class="p-4 border bg-light"> <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                    Barrack Obama
-                                </label>
-                            </div>
-                            <div class="p-4 border bg-light"> <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                    John Howard
-                                </label>
+                            ?>
                             </div>
                         </div>
                     </div>
@@ -93,6 +124,30 @@
             <button type="submit" class="btn btn-primary">Allocate Shifts</button>
         </div>
     </div>
+
+
+    <?php
+    //update data to Allocate Shifts
+    if (isset($_POST['employee'])) {
+        // update the selected employee data to shifts table
+        foreach ($_POST['employee'] as $employee) {
+            $employeeId = $employee[0];
+            $sql = $connection->prepare("insert into shifts (shift_id, employee_id) values (?,?)");
+            $sql->bind_param("ii", $id, $employeeId);
+            $sql->execute();
+        }
+    }
+
+    ?>
+</form>
+<script>
+    // Change of drop-down box option
+    function changeEmployee(choose) {
+        if (choose.value != -1) {
+            window.location.replace("changehours.php?id=" + choose.value)
+        }
+    }
+</script>
 
 
 </body>

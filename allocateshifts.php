@@ -144,7 +144,7 @@ if ($connection->connect_errno) {
     // Change of drop-down box option
     function changeEmployee(choose) {
         if (choose.value != -1) {
-            window.location.replace("changehours.php?id=" + choose.value)
+            window.location.replace("allocateshifts.php?id=" + choose.value)
         }
     }
 </script>

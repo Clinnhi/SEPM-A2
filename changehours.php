@@ -58,13 +58,13 @@ if ($connection->connect_errno) {
                             <!-- loop through database to retrieve employee and display below -->
                             <?php
                             //collect data from table 'employee'
-                            $results = $connection->query("SELECT id, name FROM 'Employee");
-                            if ($results->num_rows > 0){
-                                foreach ($results as $employee) {
-                                    if($employee['id'] == $_GET['id']){
-                                        echo "<option value='$employee[id]' selected>$employee[name]</option>";
-                                    } else{
-                                        echo "<option value='$employee[id]'>$employee[name]</option>";
+                            $results = $connection->query("SELECT id, name FROM `Employee`");
+                        if ($results->num_rows > 0) {
+                            foreach ($results as $employee) { 
+                                if ($employee['id'] == $_GET['id']) {
+                                    echo "<option value='$employee[id]' selected>$employee[name]</option>";
+                                } else {
+                                    echo "<option value='$employee[id]'>$employee[name]</option>";
                                     }
                                 }
                             }

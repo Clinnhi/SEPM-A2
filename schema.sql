@@ -71,5 +71,6 @@ ALTER TABLE `hour_limits`
 
 ALTER TABLE `hour_limits`
 ADD CONSTRAINT `hour_limits_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
+COMMIT;
 
 INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '0');

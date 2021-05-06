@@ -65,29 +65,6 @@ if ($connection->connect_errno) {
             <div class="container px-4">
                 <div class="row gx-5">
 
-                    <div class="col" style="text-align: center;">
-                        <div style="text-align: center;">
-                            <h3>Staff Currently Roastered</h3>
-                        </div>
-                        <?php
-                        //find the shift who accepted=1 from shift table
-                        $employees = $connection
-                            ->query("select name from employee where id in (select employee_id from shifts where shift_id=$id and accepted=1)")
-                            ->fetch_all();
-                        foreach ($employees as $employee) {
-                            ?>
-                            <div class="p-4 bg-light border">
-                                <!-- Employee name here  -->
-                                <?= $employee[0] ?>
-                            </div>
-                            <?php
-                        }
-                        ?>
-
-                        ?>
-
-
-                    </div>
                     <div class="col">
                         <div style="text-align: center;">
                             <h3>Add Employees To Shift</h3>
@@ -102,7 +79,7 @@ if ($connection->connect_errno) {
                                 foreach ($employees as $employee){
                                     //output data to the website
                                     ?>
-                                    <div class="p-4 border bg-light"><input class="form-check-input" type="checkbox" name="employee[]" value="<?= $employee[0] ?>" id="check<?= $employee[0] ?>">
+                                    <div class="p-4 border bg-light"><input class="form-check-input" type="radio" name="employee[]" value="<?= $employee[0] ?>" id="check<?= $employee[0] ?>">
                                     <label class="form-check-label" for="check<?= $employee[0] ?>">
                                         <?= $employee[1] ?>
                                     </label>

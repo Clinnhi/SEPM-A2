@@ -72,11 +72,11 @@ if ($connection->connect_errno) {
                         <div class="form-check" style="text-align: center;">
                             
                             <?php
-                            //find the employee who accepted=0 or null from shift table
+                            //find the employee who are unavailabilities
                             $employees = $connection
-                                ->query("select id,name from employee where id not in (select employee_id from shifts where shift_id=$id and accepted=1)")
+                                ->query("SELECT id,name FROM employee where id not in (select employee_id from unavailabilities)")
                                 ->fetch_all();
-                                foreach ($employees as $employee){
+                            foreach ($employees as $employee) {
                                     //output data to the website
                                     ?>
                                     <div class="p-4 border bg-light"><input class="form-check-input" type="radio" name="employee[]" value="<?= $employee[0] ?>" id="check<?= $employee[0] ?>">
@@ -104,15 +104,12 @@ if ($connection->connect_errno) {
 
 
     <?php
-    //update data to Allocate Shifts
+    //update shifts table, set employee who are selected, accepted = null
     if (isset($_POST['employee'])) {
-        // update the selected employee data to shifts table
-        foreach ($_POST['employee'] as $employee) {
-            $employeeId = $employee[0];
-            $sql = $connection->prepare("insert into shifts (shift_id, employee_id) values (?,?)");
-            $sql->bind_param("ii", $id, $employeeId);
-            $sql->execute();
-        }
+        $employeeId = intval($_POST['employee']);
+        $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
+        $sql->bind_param("ii", $employeeId, $id);
+        $r = $sql->execute();
     }
 
     ?>

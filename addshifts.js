@@ -22,7 +22,6 @@ $(function () {
             alert('Error loading XML document');
         },
         success: function (data, status) {
-            // console.log(status);
             console.log(data);
             addList(data);
         }
@@ -30,7 +29,6 @@ $(function () {
 
     $(".date").bind('input propertychange', function () {
         inputDate = $(".date").val();
-        //console.log(inputDate);
         $.ajax({
             url: "ajax.php",
             type: "POST",
@@ -40,7 +38,6 @@ $(function () {
                 alert('Error loading XML document');
             },
             success: function (data, status) {
-                // console.log(status);
                 console.log(data);
                 addList(data);
             }

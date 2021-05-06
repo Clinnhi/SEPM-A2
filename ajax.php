@@ -1,5 +1,6 @@
 <?php
 $inputDate = $_POST['inpDate'];
+
 $host = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
@@ -13,19 +14,6 @@ if ($connection->connect_errno) {
 $results = $connection->query("SELECT id, name FROM `Employee`");
 $results1 = $connection->query("SELECT date, employee_id FROM `Unavailabilities`");
 
-// if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location']) && !empty($_POST['employee'])) {
-//     $date = str_replace('/', '-', $_POST['date']);
-//     $time = $_POST['time'];
-//     $location = $_POST['location'];
-//     $employee = $_POST['employee'][0];
-
-//     $sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `employee_id`) VALUES (?, ?, ?, ?)");
-//     $sql->bind_param('sssi', $date, $time, $location, $employee);
-//     if (!$sql->execute()) {
-//         echo $sql->error;
-//     }
-//     $sql->close();
-// }
 $na_id = array();
 if ($results1->num_rows > 0) {
     foreach ($results1 as $na) {
@@ -34,7 +22,7 @@ if ($results1->num_rows > 0) {
         }
     }
 }
-// var_dump($na_id);
+
 $filter_result = array();
 if ($results->num_rows > 0) {
     foreach ($results as $employee) {
@@ -43,6 +31,5 @@ if ($results->num_rows > 0) {
         }
     }
 }
-// var_dump($filter_result);
 
-echo json_encode($filter_result);//json_encode方式是必须的
+echo json_encode($filter_result);

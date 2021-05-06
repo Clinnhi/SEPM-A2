@@ -84,11 +84,13 @@ if ($connection->connect_errno) {
                             <?php
                             //collect data from table 'hour_limit'
                             $result = null;
-                            $currentHour = 0;
-                            if (isset($_GET['id']) && $_GET['id'] != -1){
+
+                            if (isset($_GET['id']) && $_GET['id'] != -1) {
                                 $id = intval($_GET['id']);
-                                $result = $connection->query("select hour_limit from `Hour_Limits` where `employee_id=`'$id' limit 1");
-                                $currentHour = mysqli_fetch_array($result)[0];
+                                $result = $connection->query("select hour_limit from hour_limits where employee_id='$id'");
+                            $currentHour = mysqli_fetch_array($result)[0];
+
+                            $currentHour = $currentHour === NULL ? 0 : $currentHour;
                                   
                                 ?>                      
                                 <input type="text" readonly class="form-control-plaintext text-center" id="currentHours" value="<?= $currentHour ?>">
@@ -140,6 +142,7 @@ if ($connection->connect_errno) {
                 //<!-- else -->
                 } else{
 
+                    $id = intval($_GET['id']);
                     $sql = $connection->prepare("replace into hour_limits values(?,?)");
                     $sql->bind_param("ii", $employee['id'], $hours);
                     $sql->execute();

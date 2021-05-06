@@ -57,10 +57,19 @@ ALTER TABLE `Unavailabilities`
   ADD CONSTRAINT `unavailabilities_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
 COMMIT;
 
-CREATE TABLE `hour_limits`(
- 'employee_id' int(11) NOT NULL,
- 'hour_limit' int(255) NOT DEFAULT NULL,
-  PRIMARY KEY (`employee_id`) USING BTREE
+CREATE TABLE `Hour_Limits` (
+  `employee_id` int(11) NOT NULL,
+  `hour_limit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `Hour_Limits`
+  ADD PRIMARY KEY (`employee_id`);
+
+ALTER TABLE `Hour_Limits`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `Hour_Limits`
+ADD CONSTRAINT `hour_limits_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
 
 INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '0');

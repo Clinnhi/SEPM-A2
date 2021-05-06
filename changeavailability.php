@@ -15,7 +15,6 @@ if ($connection->connect_errno) {
 if (!empty($_POST['date'])){
     //Convert date to format accepted by database
     $date = str_replace('/', '-', $_POST['date']);
-    echo $date;
     
     $sql = $connection->prepare("INSERT INTO `Unavailabilities` (`date`, `employee_id`) VALUES (?, ?)");
     $sql->bind_param('ss',$date, $_SESSION['id']);

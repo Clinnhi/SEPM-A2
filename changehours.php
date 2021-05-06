@@ -164,7 +164,7 @@ if ($connection->connect_errno) {
                             $currentHour = 0;
                             if (isset($_GET['id']) && $_GET['id'] != -1){
                                 $id = intval($_GET['id']);
-                                $result = $connection->query("select hour_limit from hour_limits where employee_id='$id' limit 0,1");
+                                $result = $connection->query("select hour_limit from `Hour_Limits` where `employee_id=`'$id' limit 1");
                                 $currentHour = mysqli_fetch_array($result)[0];
                                   
                                 ?>                      

@@ -18,15 +18,15 @@ if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location'
     $time = $_POST['time'];
     $location = $_POST['location'];
     $employee = $_POST['employee'][0];
-    
-$sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `employee_id`) VALUES (?, ?, ?, ?)");
-$sql->bind_param('sssi',$date, $time, $location, $employee);
-if (!$sql->execute()) {
-    echo $sql->error;
-  }
-  $sql->close();
 
+    $sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `employee_id`) VALUES (?, ?, ?, ?)");
+    $sql->bind_param('sssi', $date, $time, $location, $employee);
+    if (!$sql->execute()) {
+        echo $sql->error;
+    }
+    $sql->close();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -37,14 +37,15 @@ if (!$sql->execute()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Shifts</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="addshifts.css">
+    <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+    <script src="addshifts.js"></script>
 
 </head>
 
 <body>
-<?php include 'header.php';?>
+    <?php include 'header.php'; ?>
 
     <!-- Date/Time/Location -->
     <form method="post" action="">
@@ -55,15 +56,13 @@ if (!$sql->execute()) {
                 </center>
                 <div class="row g-3">
                     <div class="col-sm">
-                        <input type="date" class="form-control" placeholder="Shift Date" aria-label="Date" name="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
+                        <input type="date" class="form-control date" placeholder="Shift Date" aria-label="Date" name="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
                     </div>
                     <div class="col-sm">
-                        <input type="text" class="form-control" placeholder="Shift Time" aria-label="Shift Time"
-                            name="time">
+                        <input type="text" class="form-control" placeholder="Shift Time" aria-label="Shift Time" name="time">
                     </div>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" placeholder="Shift Location" aria-label="Shift Location"
-                            name="location">
+                        <input type="text" class="form-control" placeholder="Shift Location" aria-label="Shift Location" name="location">
                     </div>
                 </div>
             </div>
@@ -73,23 +72,7 @@ if (!$sql->execute()) {
             <div class="position-absolute top-50 start-50 translate-middle">
                 <ul class="list-group">
                     <h5>Select Who Should Work The Shift</h5>
-                    <?php
-                    if ($results->num_rows > 0) {
-                    foreach ($results as $employee) {
-                        ?>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" value="<?=$employee['id']?>" aria-label="..."
-                            name="employee[]">
-                        <?= $employee['name'] ?>
-                    </li>
-                    <?php
-                      }
-                    } else {
-                        ?>
-                    <h7>There are no employees available.</h7>
-                    <?php
-                    }
-                    ?>
+
                 </ul>
             </div>
         </div>

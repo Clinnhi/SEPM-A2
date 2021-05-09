@@ -103,7 +103,7 @@ if ($connection->connect_errno) {
                             foreach ($employees as $employee) {
                                 // output data to the website
                                 ?>
-                                <div class="p-4 border bg-light"><input class="form-check-input" type="checkbox"
+                                <div class="p-4 border bg-light"><input class="form-check-input" type="radio"
                                                                         name="employee"
                                                                         value="<?= $employee[0] ?>"
                                                                         id="check<?= $employee[0] ?>">

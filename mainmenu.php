@@ -16,7 +16,7 @@ $result = $connection->query("SELECT * FROM `Shifts` WHERE `employee_id` = '$use
 
 if (!empty($_POST['cancel'])) {
     $shiftId = $_POST['shiftId'][0];
-    $result = $connection->query("UPDATE `Shifts` SET `accepted` = null, `employee_id` = null WHERE `shift_id` = $shiftId");
+    $result = $connection->query("UPDATE `Shifts` SET `accepted` = 3, `employee_id` = null WHERE `shift_id` = $shiftId");
 }
 ?>
 

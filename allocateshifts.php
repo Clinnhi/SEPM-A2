@@ -42,7 +42,7 @@ if ($connection->connect_errno) {
             if (!isset($_GET['id'])) {
                 $id = 0;
             }
-            $shifts = $connection->query("select shift_id,location from shifts")->fetch_all();
+            $shifts = $connection->query("select shift_id,location from shifts where not accepted=1")->fetch_all();
             foreach ($shifts as $shift) {
                 // output data to the website
                 if ($shift[0] == $id) {
@@ -60,30 +60,8 @@ if ($connection->connect_errno) {
     <div class="mt-5">
         <div class="container">
 
-            <div class="container px-4">
+        <div class="container px-4">
                 <div class="row gx-5">
-
-                    <div class="col" style="text-align: center;">
-                        <div style="text-align: center;">
-                            <h3>Staff Currently Roastered</h3>
-                        </div>
-
-                        <?php
-                        //find the employee who accepted=1 in shifts table
-                        $employees = $connection
-                            ->query("select name from employee where id in (select employee_id from shifts where shift_id=$id and accepted=1)")
-                            ->fetch_all();
-                        foreach ($employees as $employee) {
-                            ?>
-                            <div class="p-4 bg-light border">
-                                <!-- Employee name here  -->
-                                <?= $employee[0] ?>
-                            </div>
-                            <?php
-                        }
-                        ?>
-
-
                     </div>
                     <div class="col">
                         <div style="text-align: center;">

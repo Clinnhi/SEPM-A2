@@ -15,21 +15,24 @@ if (!empty($_POST['logout'])) {
     <?php
     if ($_SESSION["is_manager"] == 1) {
     ?>
+
+
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="./addshifts.php">Shifts</a>
+            <a class="nav-link" aria-current="page" href="./addshifts.php">Add Shifts</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="./allocateshifts.php">Rejected/Canceled Shifts</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="./viewAndDeactivate.php">Employee List</a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="./addemployee.php">Add New Employee</a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="./allocateshifts.php">Allocate Shifts</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="./viewAndDeactivate.php">Employee List</a>
-        </li>
         <li class="nav-item">
             <a class="nav-link" href="./changehours.php">Change Weekly Limit</a>
         </li>

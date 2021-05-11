@@ -7,10 +7,10 @@ $dbPassword = "";
 $dbName = "SEPM";
 
 $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
-// if ($connection->connect_errno) {
-//     echo "Failed to connect to MySQL: " . $connection->connect_error;
-//     exit();
-// }
+if ($connection->connect_errno) {
+    echo "Failed to connect to MySQL: " . $connection->connect_error;
+    exit();
+}
 
 
 

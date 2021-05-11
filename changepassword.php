@@ -8,10 +8,10 @@ $dbPassword = "";
 $dbName = "SEPM";
 
 $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
-if ($connection->connect_errno) {
-    echo "Failed to connect to MySQL: " . $connection->connect_error;
-    exit();
-}
+// if ($connection->connect_errno) {
+//     echo "Failed to connect to MySQL: " . $connection->connect_error;
+//     exit();
+// }
 
 
 
@@ -47,7 +47,7 @@ if ($connection->connect_errno) {
                     <p class="text-center">Use the form below to change your password</p>
                     <form method="post" id="">
 
-                        <input type="password" class="col-sm-3" name="oldPassword" id="oldPassword" placeholder="Current Password" autocomplete="off"> <br /> <br />
+                        <input type="password" class="col-sm-3" name="oldPassword" id="employeePassword" placeholder="Current Password" autocomplete="off"> <br /> <br />
 
                         <input type="password" class="col-sm-3" name="newPassword" id="newPassword" placeholder="New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character"> <br /> <br />
 

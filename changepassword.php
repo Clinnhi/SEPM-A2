@@ -49,9 +49,9 @@ if ($connection->connect_errno) {
 
                         <input type="password" class="col-sm-3" name="oldPassword" id="oldPassword" placeholder="Current Password" autocomplete="off"> <br /> <br />
 
-                        <input type="password" class="col-sm-3" name="newPassword" id="newPassword" placeholder="New Password" autocomplete="off"> <br /> <br />
+                        <input type="password" class="col-sm-3" name="newPassword" id="newPassword" placeholder="New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character"> <br /> <br />
 
-                        <input type="password" class="col-sm-3" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm New Password" autocomplete="off">
+                        <input type="password" class="col-sm-3" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character">
                         <div class="row">
                         </div>
                         <br />

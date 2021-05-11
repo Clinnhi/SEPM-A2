@@ -58,30 +58,38 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
       <form method="post" action="">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" name="employeeEmail">
+          <input type="email" class="form-control" name="employeeEmail" required>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" name="employeePassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character">
+          <input type="password" class="form-control" name="employeePassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character" required>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Phone Number</label>
-          <input type="phone" class="form-control" name="employeePhoneNo">
+          <input type="phone" class="form-control" name="employeePhoneNo" required>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Date Of Birth</label>
-          <input type="date" class="form-control" name="employeeDOB" value="2021-06-01">
+          <input type="date" class="form-control" name="employeeDOB" value="2021-06-01" required>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Full Name</label>
-          <input type="text" class="form-control" name="employeeFullName">
+          <input type="text" class="form-control" name="employeeFullName" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Preferred Name</label>
+          <input type="text" class="form-control" name="employeePreferredName" >
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Residential Address</label>
-          <input type="text" class="form-control" name="employeeAddress">
+          <input type="text" class="form-control" name="employeeAddress" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Weekly Hour Limit</label>
+          <input type="text" class="form-control" name="employeeLimit" required>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="optradio" id="shiftManagerOption" value="manager" checked  >
+          <input class="form-check-input" type="radio" name="optradio" id="shiftManagerOption" value="manager" checked>
           <label class="form-check-label" for="shiftManagerOption">
             Shift Manager
           </label>

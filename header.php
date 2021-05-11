@@ -45,6 +45,9 @@ if (!empty($_POST['logout'])) {
     <li class="nav-item">
         <a class="nav-link" href="./changeavailability.php">Change Availability</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="./updatedetails.php">Update Details</a>
+    </li>
 
 
 

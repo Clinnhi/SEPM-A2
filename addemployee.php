@@ -47,7 +47,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
 
 <body>
 
-<?php include 'header.php';?>
+  <?php include 'header.php'; ?>
 
 
   <div class="container">
@@ -78,7 +78,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Preferred Name</label>
-          <input type="text" class="form-control" name="employeePreferredName" >
+          <input type="text" class="form-control" name="employeePreferredName">
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Residential Address</label>
@@ -96,7 +96,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="optradio" id="staffUserOption" value="staff">
-          <label class="form-check-label" for="staffUserOption" >
+          <label class="form-check-label" for="staffUserOption">
             Staff User
           </label>
         </div>

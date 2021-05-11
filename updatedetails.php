@@ -37,7 +37,6 @@ if ($connection->connect_errno) {
         <hr>
         <div class="row">
 
-            <!-- edit form column -->
             <div class="col-md personal-info">
                 <h3>Personal info</h3>
 
@@ -47,23 +46,22 @@ if ($connection->connect_errno) {
                             <label class="col-lg-3 control-label">Full Name: </label>
                             <div class="col-sm-3">
                                 <!-- Preferred name goes into value -->
-                                <input class="form-control" type="text" value="Jane Do">
+                                <input class="form-control" type="text" id="employeeFullName" value="Jane Do">
                             </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Weekly Hour Limit: </label>
                         <div class="col-sm-3">
-                            <!-- Preferred name goes into value -->
-                            <input class="form-control" type="number" value="40" disabled>
+                            <!-- Weekly Hour Limits goes into 40 -->
+                            <input class="form-control" type="number" id="employeeLimit" value="40" disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Preferred Name: </label>
                         <div class="col-sm-3">
-                            <!-- Preferred name goes into value -->
-                            <input class="form-control" type="text" value="Jane">
+                            <input class="form-control" type="text" id="employeePreferredName" value="Jane">
                         </div>
                     </div>
 
@@ -71,50 +69,25 @@ if ($connection->connect_errno) {
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone Number: </label>
                         <div class="col-sm-3">
-                            <!-- Preferred name goes into value -->
-                            <input class="form-control" type="text" value="0412648235">
+                            <input class="form-control" type="text" id="employeePhoneNo" value="0412648235">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Home Address: </label>
                         <div class="col-sm-3">
-                            <!-- Preferred name goes into value -->
-                            <input class="form-control" type="text" value="42 Mill Park Lake 3089">
+                            <input class="form-control" type="text" id="employeeAddress" value="42 Mill Park Lake 3089">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" value="janesemail@gmail.com">
+                            <input class="form-control" id="employeeEmail" type="text" value="janesemail@gmail.com">
                         </div>
                     </div>
 
                     <a href="./changepassword.php" class="button-class">Change Password</a>
-
-                
-
-                    <!-- <div class="form-group">
-                        <label class="col-md-3 control-label">Old Password:</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="password" value="11111122333">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">New Password:</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="password" value="11111122333">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Confirm New Password:</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="password" value="11111122333">
-                        </div> -->
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>

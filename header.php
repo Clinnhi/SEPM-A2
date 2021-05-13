@@ -12,11 +12,12 @@ if (!empty($_POST['logout'])) {
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="./mainmenu.php">Home</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="./shifthistory.php">Shift History</a>
+    </li>
     <?php
     if ($_SESSION["is_manager"] == 1) {
     ?>
-
-
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="./addshifts.php">Add Shifts</a>
         </li>
@@ -46,8 +47,11 @@ if (!empty($_POST['logout'])) {
         <a class="nav-link" href="./changeavailability.php">Change Availability</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="./updatedetails.php">Update Details</a>
+        <a class="nav-link" href="./profile.php">Profile</a>
     </li>
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="./updatedetails.php">Update Details</a>
+    </li> -->
 
 
 

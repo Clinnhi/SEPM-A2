@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -53,7 +52,7 @@ if ($connection->connect_errno) {
                         <h5 class="card-title">Employee List</h5>
                         <br>
 
-                        <select class="form-select text-center">
+                        <select class="form-select text-center" id="select-employee" onchange="changeEmployee(this)">
                             <option selected>Select Which Employee</option>
                             <!-- loop through database to retrieve employee and display below -->
                             <?php
@@ -83,14 +82,16 @@ if ($connection->connect_errno) {
                         <div class="mb-2 mx-auto"><br>
                             <?php
                             //collect data from table 'hour_limit'
-                            $result = null;
-
+                            $currentHour = null;
                             if (isset($_GET['id']) && $_GET['id'] != -1) {
                                 $id = intval($_GET['id']);
-                                $result = $connection->query("select hour_limit from hour_limits where employee_id='$id'");
-                            $currentHour = mysqli_fetch_array($result)[0];
+                                //Get hour limit
+                                 $result = $connection
+                                    ->query("select hour_limit from hour_limits where employee_id='$id'")
+                                    ->fetch_all(MYSQLI_ASSOC)[0];
 
-                            $currentHour = $currentHour === NULL ? 0 : $currentHour;
+                            //Output
+                            $currentHour = $result['hour_limit'] ?: 40;
                                   
                                 ?>                      
                                 <input type="text" readonly class="form-control-plaintext text-center" id="currentHours" value="<?= $currentHour ?>">
@@ -127,7 +128,7 @@ if ($connection->connect_errno) {
 
                 <!-- Code to check if staff is eligible to have their hourly limits increased -->
                 <?php
-                //<!-- If they are -->
+                //check data correctly
                 if (isset($_POST['hoursNumber']) && isset($_GET['id']) && $_GET['id'] != -1){
                     $hoursNumber = $_POST['hoursNumber'];
                     $hours = $currentHour + $hoursNumber;
@@ -141,10 +142,11 @@ if ($connection->connect_errno) {
                 <?php
                 //<!-- else -->
                 } else{
+                    //update data
 
                     $id = intval($_GET['id']);
                     $sql = $connection->prepare("replace into hour_limits values(?,?)");
-                    $sql->bind_param("ii", $employee['id'], $hours);
+                    $sql->bind_param("ii", $id, $hours);
                     $sql->execute();
                 ?>
                 <div class="alert alert-success" role="alert">

@@ -13,14 +13,15 @@ if ($connection->connect_errno) {
 }
 $results = $connection->query("SELECT id, name FROM `Employee`");
 
-if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location']) && !empty($_POST['employee'])) {
+if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location']) && !empty($_POST['duration']) && !empty($_POST['employee'])) {
     $date = str_replace('/', '-', $_POST['date']);
     $time = $_POST['time'];
     $location = $_POST['location'];
+    $duration = $_POST['duration'];
     $employee = $_POST['employee'][0];
 
-    $sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `employee_id`) VALUES (?, ?, ?, ?)");
-    $sql->bind_param('sssi', $date, $time, $location, $employee);
+    $sql = $connection->prepare("INSERT INTO `Shifts` (`date`, `time`, `location`, `duration`, `employee_id`) VALUES (?, ?, ?, ?, ?)");
+    $sql->bind_param('sssii', $date, $time, $location, $duration, $employee);
     if (!$sql->execute()) {
         echo $sql->error;
     }
@@ -61,8 +62,11 @@ if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location'
                     <div class="col-sm">
                         <input type="text" class="form-control" placeholder="Shift Time" aria-label="Shift Time" name="time">
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" placeholder="Shift Location" aria-label="Shift Location" name="location">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" placeholder="Shift Duration Hours" aria-label="Shift Duration" name="duration">
                     </div>
                 </div>
             </div>

@@ -25,6 +25,7 @@ CREATE TABLE `Shifts` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `location` varchar(100) NOT NULL,
+  `duration` int(2) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `accepted` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

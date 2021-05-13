@@ -43,6 +43,14 @@ if (!empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['location'
     <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
     <script src="addshifts.js"></script>
 
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./addshifts.php']").addClass("active");
+        });
+    </script>
+
 </head>
 
 <body>

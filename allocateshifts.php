@@ -20,48 +20,55 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allocate Shifts</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="addshifts.css">
+
+    <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./allocateshifts.php']").addClass("active");
+        });
+    </script>
 </head>
 
 <body>
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<div class="container" style="text-align: center;">
-    <div class="margin-top">
-        <select name="shiftList" onchange="changeShift(this)">
-            <option></option>
+    <div class="container" style="text-align: center;">
+        <div class="margin-top">
+            <select name="shiftList" onchange="changeShift(this)">
+                <option></option>
 
-            <?php
-            // Get shifts information according to the passed parameter id
-            $id = intval($_GET['id']);
-            if (!isset($_GET['id'])) {
-                $id = 0;
-            }
-            $shifts = $connection->query("select shift_id,location from shifts where not accepted=1")->fetch_all();
-            foreach ($shifts as $shift) {
-                // output data to the website
-                if ($shift[0] == $id) {
-                    echo "<option value='$shift[0]' selected>$shift[1]</option>";
-                } else {
-                    echo "<option value='$shift[0]'>$shift[1]</option>";
+                <?php
+                // Get shifts information according to the passed parameter id
+                $id = intval($_GET['id']);
+                if (!isset($_GET['id'])) {
+                    $id = 0;
                 }
-            }
-            ?>
-        </select>
+                $shifts = $connection->query("select shift_id,location from shifts where not accepted=1")->fetch_all();
+                foreach ($shifts as $shift) {
+                    // output data to the website
+                    if ($shift[0] == $id) {
+                        echo "<option value='$shift[0]' selected>$shift[1]</option>";
+                    } else {
+                        echo "<option value='$shift[0]'>$shift[1]</option>";
+                    }
+                }
+                ?>
+            </select>
+        </div>
     </div>
-</div>
 
-<form action="" method="post">
-    <div class="mt-5">
-        <div class="container">
+    <form action="" method="post">
+        <div class="mt-5">
+            <div class="container">
 
-        <div class="container px-4">
-                <div class="row gx-5">
+                <div class="container px-4">
+                    <div class="row gx-5">
                     </div>
                     <div class="col">
                         <div style="text-align: center;">
@@ -82,16 +89,13 @@ and id in (select employee_id from hour_limits where get_shift_hour(employee_id)
                                 ->fetch_all(MYSQLI_ASSOC);
                             foreach ($employees as $employee) {
                                 // output data to the website
-                                ?>
-                                <div class="p-4 border bg-light"><input class="form-check-input" type="radio"
-                                                                        name="employee"
-                                                                        value="<?= $employee['id'] ?>"
-                                                                        id="check<?= $employee['id'] ?>">
+                            ?>
+                                <div class="p-4 border bg-light"><input class="form-check-input" type="radio" name="employee" value="<?= $employee['id'] ?>" id="check<?= $employee['id'] ?>">
                                     <label class="form-check-label" for="check<?= $employee['id'] ?>">
                                         <?= $employee['name'] ?>
                                     </label>
                                 </div>
-                                <?php
+                            <?php
                             }
                             ?>
 
@@ -100,35 +104,35 @@ and id in (select employee_id from hour_limits where get_shift_hour(employee_id)
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="bottomright">
-            <button type="submit" class="btn btn-primary">Allocate Shifts</button>
         </div>
-    </div>
-    <?php
+
+        <div class="container">
+            <div class="bottomright">
+                <button type="submit" class="btn btn-primary">Allocate Shifts</button>
+            </div>
+        </div>
+        <?php
 
 
 
-    //update shifts table, set employee who are selected, accepted = null
-    if (isset($_POST['employee'])) {
-        $employeeId = intval($_POST['employee']);
-        $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
-        $sql->bind_param("ii", $employeeId, $id);
-        $r = $sql->execute();
-    }
-
-    ?>
-</form>
-<script>
-    // Change of drop-down box option
-    function changeShift(choose) {
-        if (choose.value != -1) {
-            window.location.replace("allocateshifts.php?id=" + choose.value)
+        //update shifts table, set employee who are selected, accepted = null
+        if (isset($_POST['employee'])) {
+            $employeeId = intval($_POST['employee']);
+            $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
+            $sql->bind_param("ii", $employeeId, $id);
+            $r = $sql->execute();
         }
-    }
-</script>
+
+        ?>
+    </form>
+    <script>
+        // Change of drop-down box option
+        function changeShift(choose) {
+            if (choose.value != -1) {
+                window.location.replace("allocateshifts.php?id=" + choose.value)
+            }
+        }
+    </script>
 
 </body>
 

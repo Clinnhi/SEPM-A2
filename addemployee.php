@@ -42,7 +42,15 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" href="addshifts.css">
+  <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
 
+  <script>
+    $(function() {
+      //remove active class for 'Home' and add active class for current page.
+      $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+      $(".nav-item a[href|='./addemployee.php']").addClass("active");
+    });
+  </script>
 </head>
 
 <body>

@@ -22,7 +22,7 @@ if (isset($_POST['deactivate'])) {
     } else {
         echo "Error deleting record: " . $connection->error;
     }
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +37,16 @@ if (isset($_POST['deactivate'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="addshifts.css">
+
+    <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./viewAndDeactivate.php']").addClass("active");
+        });
+    </script>
 
 </head>
 
@@ -53,9 +63,9 @@ if (isset($_POST['deactivate'])) {
                     foreach ($results as $employee) {
                 ?>
                         <li class="list-group-item"><?= $employee['name'] ?> <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                                <button type="submit" class="btn btn-dark" name="view" value="<?=$employee['id']?>">View Profile</button>
-                                <button type="submit" class="btn btn-secondary" name="edit" value="<?=$employee['id']?>">Edit Profile</button>
-                                <button type="submit" class="btn btn-primary" name="deactivate" value="<?=$employee['id']?>">Deactivate Account</button>
+                                <button type="submit" class="btn btn-dark" name="view" value="<?= $employee['id'] ?>">View Profile</button>
+                                <button type="submit" class="btn btn-secondary" name="edit" value="<?= $employee['id'] ?>">Edit Profile</button>
+                                <button type="submit" class="btn btn-primary" name="deactivate" value="<?= $employee['id'] ?>">Deactivate Account</button>
                             </div>
                         </li>
                     <?php

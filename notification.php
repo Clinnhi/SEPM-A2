@@ -36,31 +36,33 @@ if (!empty($_POST['rejectButton']) && !empty($_POST['shiftId'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Shifts</title>
 
+    <!-- Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="notification.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./notification.php']").addClass("active");
+        });
+    </script>
 </head>
 
 <body>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-
     <?php include 'header.php'; ?>
 
     <!-- Notifications -->
     <div class="container">
-        <div class="margin-top5">
+        <div class="mt-5">
             <h5>Notifications</h5>
             <?php
             if ($result->num_rows > 0) {
                 foreach ($result as $shift) {
             ?>
-                    <div class="list-group margin-top3">
+                    <div class="list-group mt-3">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <p class="mb-1">&nbsp;&nbsp;A shift has been allocated to you</p>
                             <p class="mb-1">【TIME】<?= $shift['time'] ?></p>
@@ -88,7 +90,7 @@ if (!empty($_POST['rejectButton']) && !empty($_POST['shiftId'])) {
 
     <!-- Pagination -->
     <div class="container">
-        <div class="d-flex flex-row-reverse margin-top3">
+        <div class="d-flex flex-row-reverse mt-3">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">

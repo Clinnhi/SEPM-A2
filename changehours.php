@@ -29,7 +29,15 @@ if ($connection->connect_errno) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="addshifts.css">
+    <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
 
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./changehours.php']").addClass("active");
+        });
+    </script>
 
 </head>
 
@@ -58,12 +66,12 @@ if ($connection->connect_errno) {
                             <?php
                             //collect data from table 'employee'
                             $results = $connection->query("SELECT id, name FROM `Employee`");
-                        if ($results->num_rows > 0) {
-                            foreach ($results as $employee) { 
-                                if ($employee['id'] == $_GET['id']) {
-                                    echo "<option value='$employee[id]' selected>$employee[name]</option>";
-                                } else {
-                                    echo "<option value='$employee[id]'>$employee[name]</option>";
+                            if ($results->num_rows > 0) {
+                                foreach ($results as $employee) {
+                                    if ($employee['id'] == $_GET['id']) {
+                                        echo "<option value='$employee[id]' selected>$employee[name]</option>";
+                                    } else {
+                                        echo "<option value='$employee[id]'>$employee[name]</option>";
                                     }
                                 }
                             }
@@ -74,7 +82,7 @@ if ($connection->connect_errno) {
                 </div>
 
 
-            
+
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Current Hours</h5>
@@ -86,16 +94,16 @@ if ($connection->connect_errno) {
                             if (isset($_GET['id']) && $_GET['id'] != -1) {
                                 $id = intval($_GET['id']);
                                 //Get hour limit
-                                 $result = $connection
+                                $result = $connection
                                     ->query("select hour_limit from hour_limits where employee_id='$id'")
                                     ->fetch_all(MYSQLI_ASSOC)[0];
 
-                            //Output
-                            $currentHour = $result['hour_limit'] ?: 40;
-                                  
-                                ?>                      
+                                //Output
+                                $currentHour = $result['hour_limit'] ?: 40;
+
+                            ?>
                                 <input type="text" readonly class="form-control-plaintext text-center" id="currentHours" value="<?= $currentHour ?>">
-                            <!-- Code to retrieve employees hours goes in value -->
+                                <!-- Code to retrieve employees hours goes in value -->
                             <?php
                             }
                             ?>
@@ -129,33 +137,33 @@ if ($connection->connect_errno) {
                 <!-- Code to check if staff is eligible to have their hourly limits increased -->
                 <?php
                 //check data correctly
-                if (isset($_POST['hoursNumber']) && isset($_GET['id']) && $_GET['id'] != -1){
+                if (isset($_POST['hoursNumber']) && isset($_GET['id']) && $_GET['id'] != -1) {
                     $hoursNumber = $_POST['hoursNumber'];
                     $hours = $currentHour + $hoursNumber;
 
-                    if ($hours >= 80){
-                
-                ?>
-                <div class="alert alert-danger" role="alert">
-                    This staff is not eligible to have his/her hours increased.
-                </div>
-                <?php
-                //<!-- else -->
-                } else{
-                    //update data
+                    if ($hours >= 80) {
 
-                    $id = intval($_GET['id']);
-                    $sql = $connection->prepare("replace into hour_limits values(?,?)");
-                    $sql->bind_param("ii", $id, $hours);
-                    $sql->execute();
                 ?>
-                <div class="alert alert-success" role="alert">
-                    This staff working limit has been successfully increased.
-                </div>
+                        <div class="alert alert-danger" role="alert">
+                            This staff is not eligible to have his/her hours increased.
+                        </div>
+                    <?php
+                        //<!-- else -->
+                    } else {
+                        //update data
+
+                        $id = intval($_GET['id']);
+                        $sql = $connection->prepare("replace into hour_limits values(?,?)");
+                        $sql->bind_param("ii", $id, $hours);
+                        $sql->execute();
+                    ?>
+                        <div class="alert alert-success" role="alert">
+                            This staff working limit has been successfully increased.
+                        </div>
                 <?php
-            }
-        }
-        ?>
+                    }
+                }
+                ?>
             </div>
         </div>
 
@@ -177,13 +185,13 @@ if ($connection->connect_errno) {
     </form>
 
     <script>
-    // Change of drop-down box option
-    function changeEmployee(choose) {
-        if (choose.value != -1) {
-            window.location.replace("changehours.php?id=" + choose.value)
+        // Change of drop-down box option
+        function changeEmployee(choose) {
+            if (choose.value != -1) {
+                window.location.replace("changehours.php?id=" + choose.value)
+            }
         }
-    }
-</script>
+    </script>
 
 
 

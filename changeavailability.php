@@ -12,12 +12,12 @@ if ($connection->connect_errno) {
     exit();
 }
 
-if (!empty($_POST['date'])){
+if (!empty($_POST['date'])) {
     //Convert date to format accepted by database
     $date = str_replace('/', '-', $_POST['date']);
-    
+
     $sql = $connection->prepare("INSERT INTO `Unavailabilities` (`date`, `employee_id`) VALUES (?, ?)");
-    $sql->bind_param('ss',$date, $_SESSION['id']);
+    $sql->bind_param('ss', $date, $_SESSION['id']);
     if (!$sql->execute()) {
         echo $sql->error;
     }
@@ -41,6 +41,13 @@ if (!empty($_POST['date'])){
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <script>
+        $(function() {
+            //remove active class for 'Home' and add active class for current page.
+            $(".nav-item a[href|='./mainmenu.php']").removeClass("active");
+            $(".nav-item a[href|='./changeavailability.php']").addClass("active");
+        });
+    </script>
 
 </head>
 
@@ -55,20 +62,20 @@ if (!empty($_POST['date'])){
     <?php include 'header.php'; ?>
 
     <form method="post" action="">
-    <div class="container" style="text-align: center;">
-        <br><br>
-        <h3>Please indicate which day you are unavailable</h3>  
-        <br><br>
+        <div class="container" style="text-align: center;">
+            <br><br>
+            <h3>Please indicate which day you are unavailable</h3>
+            <br><br>
 
-        <input type="date" name="date" id="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
-        <button type="submit" class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">Confirm</button>
+            <input type="date" name="date" id="date" min="<?= date('Y-m-d'); ?>" value="<?= date('Y-m-d'); ?>">
+            <button type="submit" class="btn btn-secondary btn-sm" onclick="confirmBtn()" id="result">Confirm</button>
 
-        <!-- <p id="test"></p> -->
-
-
+            <!-- <p id="test"></p> -->
 
 
-    </div>
+
+
+        </div>
     </form>
 
 

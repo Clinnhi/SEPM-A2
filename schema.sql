@@ -73,4 +73,23 @@ ALTER TABLE `hour_limits`
 ADD CONSTRAINT `hour_limits_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
 COMMIT;
 
+delimiter ;;
+CREATE FUNCTION `get_shift_hour`(employee_id int)
+ RETURNS int(11)
+BEGIN
+  declare current_hour int;
+  select count(shift_id)*8 into current_hour from shifts where shifts.employee_id=employee_id;
+
+  RETURN current_hour;
+END
+;;
+delimiter ;
+
+delimiter ;;
+CREATE TRIGGER `add_hour_limit` AFTER INSERT ON `employee` FOR EACH ROW begin
+insert into hour_limits values (new.id, 40);
+end
+;;
+delimiter ;
+
 INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '1');

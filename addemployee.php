@@ -62,7 +62,8 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
     <center>
       <h3 class="margin-top">Add New Employee</h3>
     </center>
-    <div class="position-absolute top-50 start-50 translate-middle">
+    <!-- <div class="position-absolute top-50 start-50 translate-middle"> -->
+    <div class="mt-5 mb-5 d-flex justify-content-center">
       <form method="post" action="">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -112,8 +113,8 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
   </div>
 
 
-  <div class="container">
-    <div class="bottomright">
+  <div class="container mb-5">
+    <div class="d-flex justify-content-end">
       <button type="submit" class="btn btn-primary">Add New Account</button>
     </div>
   </div>

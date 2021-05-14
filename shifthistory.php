@@ -45,7 +45,7 @@ if ($connection->connect_errno) {
     <!-- Notifications -->
     <div class="container">
         <div class="mt-5">
-            <h5>Worked Shifts</h5>
+            <h1 class="mb-3">Worked Shifts</h1>
 
             <div class="list-group mt-3">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">

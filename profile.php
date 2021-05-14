@@ -40,10 +40,8 @@ if ($connection->connect_errno) {
 <body>
     <?php include 'header.php'; ?>
 
-    <div class="container margin-top">
-        <center>
-            <h1>My Profile</h1>
-        </center>
+    <div class="container mt-5">
+        <h1 class="text-center">My Profile</h1>
         <hr>
         <dl class="row">
             <dt class="col-sm-4"></dt>

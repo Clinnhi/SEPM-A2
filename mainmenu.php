@@ -44,7 +44,7 @@ if (!empty($_POST['cancel'])) {
 
     <div class="container">
         <div class="mt-5">
-            <h5>Accepted Shifts</h5>
+            <h1 class="mb-3">Accepted Shifts</h1>
             <?php
             if ($result->num_rows > 0) {
                 foreach ($result as $shift) {

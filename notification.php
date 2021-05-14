@@ -57,7 +57,7 @@ if (!empty($_POST['rejectButton']) && !empty($_POST['shiftId'])) {
     <!-- Notifications -->
     <div class="container">
         <div class="mt-5">
-            <h5>Notifications</h5>
+            <h1 class="mb-3">Notifications</h1>
             <?php
             if ($result->num_rows > 0) {
                 foreach ($result as $shift) {

@@ -46,14 +46,20 @@ if ($connection->connect_errno) {
     <div class="container">
         <div class="mt-5">
             <h1 class="mb-3">Worked Shifts</h1>
+            <?php
+            $shiftList = $connection
+                ->query("select date,time,location,duration from shifts where employee_id='$user' and accepted=1")
+                ->fetch_all(MYSQLI_ASSOC);
+            foreach ($shiftList as $shift) {
+            ?>
 
             <div class="list-group mt-3">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                     <p class="mb-1">&nbsp;&nbsp;You have already completed this shift</p>
-                    <p class="mb-1">【TIME】13:34:00</p>
-                    <p class="mb-1">【DATE】2021-5-13</p>
-                    <p class="mb-1">【Location】Melbourne</p>
-                    <p class="mb-1">【Duration】4 hours</p>
+                    <p class="mb-1">【TIME】<?= $shift['time'] ?></p>
+                    <p class="mb-1">【DATE】<?= $shift['date'] ?></p>
+                    <p class="mb-1">【Location】<?= $shift['location'] ?></p>
+                    <p class="mb-1">【Duration】<?= $shift['duration'] ?></p>
                 </a>
             </div>
 

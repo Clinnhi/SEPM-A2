@@ -43,30 +43,35 @@ if ($connection->connect_errno) {
     <div class="container mt-5">
         <h1 class="text-center">My Profile</h1>
         <hr>
+        <?php
+        $user = $_SESSION['id'];
+        $profile = $connection->query("select * from employee where id='$user'")->fetch_assoc();
+        $hourLimit = $connection->query("select hour_limit from hour_limits where employee_id='$user'")->fetch_assoc();
+        ?>
         <dl class="row">
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Full Name:</dt>
-            <dd class="col-sm-5">Ziyuan Wang</dd>
+            <dd class="col-sm-5"><?= $profile['name'] ?></dd>
 
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Weekly Hour Limit:</dt>
-            <dd class="col-sm-5">40</dd>
+            <dd class="col-sm-5"><?= $hourLimit['hour_limit'] ?></dd>
 
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Preferred Name:</dt>
-            <dd class="col-sm-5">Atlas</dd>
+            <dd class="col-sm-5"><?= $profile['preferred_name']?></dd>
 
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Phone Number:</dt>
-            <dd class="col-sm-5">0410000000</dd>
+            <dd class="col-sm-5"><?= $profile['phone_number'] ?></dd>
 
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Home Address:</dt>
-            <dd class="col-sm-5">1 King Street 3000</dd>
+            <dd class="col-sm-5"><?= $profile['address'] ?></dd>
 
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Email:</dt>
-            <dd class="col-sm-5">atlas@gmail.com</dd>
+            <dd class="col-sm-5"><?= $profile['email'] ?></dd>
         </dl>
         <hr>
         <div class="d-flex justify-content-end">

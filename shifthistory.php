@@ -62,6 +62,9 @@ if ($connection->connect_errno) {
                     <p class="mb-1">【Duration】<?= $shift['duration'] ?></p>
                 </a>
             </div>
+            <?php
+        }
+        ?>
 
         </div>
     </div>

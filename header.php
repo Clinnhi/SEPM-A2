@@ -19,7 +19,7 @@ if (!empty($_POST['logout'])) {
     if ($_SESSION["is_manager"] == 1) {
     ?>
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="./addshifts.php">Add Shifts</a>
+            <a class="nav-link" aria-current="page" href="./addshifts.php">Add/Update Shifts</a>
         </li>
 
         <li class="nav-item">

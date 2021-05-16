@@ -45,19 +45,14 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
                 <option></option>
 
                 <?php
-                // Get shifts information according to the passed parameter id
-                $id = intval($_GET['id']);
-                if (!isset($_GET['id'])) {
-                    $id = 0;
-                }
+                // $id = intval($_POST['id']);
+                // if (!isset($_POST['id'])) {
+                //     $id = 0;
+                // }
                 $shifts = $connection->query("select shift_id,location,date from shifts where not accepted=1")->fetch_all();
                 foreach ($shifts as $shift) {
                     // output data to the website
-                    if ($shift[0] == $id) {
-                        echo "<option value='$shift[0]' class='$shift[2]' selected>$shift[1]</option>";
-                    } else {
-                        echo "<option value='$shift[0]' class='$shift[2]'>$shift[1]</option>";
-                    }
+                    echo "<option value='$shift[0]' class='$shift[2]'>$shift[1]</option>";
                 }
                 ?>
             </select>
@@ -86,18 +81,22 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
         </div>
         </div>
 
+        <input type="number" class="idInput visually-hidden" name="id" value="">
+
         <div class="container">
             <div class="bottomright">
                 <button type="submit" class="btn btn-primary">Allocate Shifts</button>
             </div>
         </div>
+
+
         <?php
 
 
-
         //update shifts table, set employee who are selected, accepted = null
-        if (isset($_POST['employee'])) {
+        if (isset($_POST['employee']) && isset($_POST['id'])) {
             $employeeId = intval($_POST['employee']);
+            $id = $_POST['id'];
             $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
             $sql->bind_param("ii", $employeeId, $id);
             $r = $sql->execute();

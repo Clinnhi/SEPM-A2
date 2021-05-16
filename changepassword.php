@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -13,7 +12,25 @@ if ($connection->connect_errno) {
     exit();
 }
 
+$user = $_SESSION['id'];
+$profile = $connection->query("SELECT * FROM employee WHERE id='$user'")->fetch_assoc();
 
+$password = $profile['password'];
+
+if (!empty($_POST['submit'])) {
+    if ($password == $_POST['oldPassword'] && $_POST['newPassword'] == $_POST['confirmNewPassword']){
+        $newPassword = $_POST['newPassword'];
+        $sql = $connection->prepare("UPDATE `employee` SET `password` = ? WHERE id = ?");
+        $sql->bind_param('ss', $newPassword, $user);
+        if (!$sql->execute()) {
+            echo $sql->error;
+        }
+        $sql->close();
+    }
+    else {
+        echo "You made an incorrect input!";
+    }
+}
 
 
 ?>
@@ -26,7 +43,8 @@ if ($connection->connect_errno) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="addshifts.css">
 
 </head>
@@ -45,17 +63,26 @@ if ($connection->connect_errno) {
             <div class="row">
                 <div class="">
                     <p class="text-center">Use the form below to change your password</p>
-                    <form method="post" id="">
+                    <form method="post" id="" action="">
 
-                        <input type="password" class="col-sm-3" name="oldPassword" id="employeePassword" placeholder="Current Password" autocomplete="off"> <br /> <br />
+                        <input type="password" class="col-sm-3" name="oldPassword" id="employeePassword"
+                            placeholder="Current Password" autocomplete="off" required="required"> <br /> <br />
 
-                        <input type="password" class="col-sm-3" name="newPassword" id="newPassword" placeholder="New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character"> <br /> <br />
+                        <input type="password" class="col-sm-3" name="newPassword" id="newPassword"
+                            placeholder="New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}"
+                            maxlength="8"
+                            title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character"
+                            required="required"> <br /> <br />
 
-                        <input type="password" class="col-sm-3" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm New Password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8" title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character">
+                        <input type="password" class="col-sm-3" name="confirmNewPassword" id="confirmNewPassword"
+                            placeholder="Confirm New Password" autocomplete="off"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,8}" maxlength="8"
+                            title="Exactly 8 Charcters, 1 Uppercase, 1 Lower Case, 1 Number, 1 Special Character"
+                            required="required">
                         <div class="row">
                         </div>
                         <br />
-                        <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-sm" value="Change Password">
+                        <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-sm" value="Change Password" name="submit">
                     </form>
                 </div>
                 <!--/col-sm-6-->

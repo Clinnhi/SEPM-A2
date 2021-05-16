@@ -12,7 +12,28 @@ if ($connection->connect_errno) {
     exit();
 }
 
+$user = $_SESSION['id'];
+$profile = $connection->query("select * from employee where id='$user'")->fetch_assoc();
+$hourLimit = $connection->query("select hour_limit from hour_limits where employee_id='$user'")->fetch_assoc();
 
+
+$name = $profile['name'];
+$userHourLimit = $hourLimit['hour_limit'];
+$preferred_name = $profile['preferred_name'];
+$phone_number = $profile['phone_number'];
+$address = $profile['address'];
+$email = $profile['email'];
+
+if (!empty($_POST['submit'])) {
+	$name = $_POST['employeeFullName'] ? $_POST['employeeFullName'] : $name;
+    $preferred_name = $_POST['employeePreferredName'] ? $_POST['employeePreferredName'] : $preferred_name;
+    $phone_number = $_POST['employeePhoneNo'] ? $_POST['employeePhoneNumber'] : $phone_number;
+	$address = $_POST['employeeAddress'] ? $_POST['employeeAddress'] : $address;
+    $email = $_POST['employeeEmail'] ? $_POST['ememployeeEmail'] : $email;
+
+    $sql = $connection->prepare("UPDATE `Employee` (`name`, `preferred_name`, `phone_number`, `address`, `email`) VALUES (?, ?, ?, ?, ?)");
+    $sql->bind_param('sssss', $name, $preferred_name, $phone_number, $address, $email);
+}
 
 ?>
 
@@ -46,7 +67,7 @@ if ($connection->connect_errno) {
                             <label class="col-lg-3 control-label">Full Name: </label>
                             <div class="col-sm-3">
                                 <!-- Preferred name goes into value -->
-                                <input class="form-control" type="text" id="employeeFullName" value="Jane Do">
+                                <input class="form-control" type="text" id="employeeFullName" value=<?=$name?> required="required">
                             </div>
                     </div>
 
@@ -54,14 +75,14 @@ if ($connection->connect_errno) {
                         <label class="col-lg-3 control-label">Weekly Hour Limit: </label>
                         <div class="col-sm-3">
                             <!-- Weekly Hour Limits goes into 40 -->
-                            <input class="form-control" type="number" id="employeeLimit" value="40" disabled>
+                            <input class="form-control" type="number" id="userHourLimit" value=<?= $hourLimit['hour_limit'] ?> disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Preferred Name: </label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeePreferredName" value="Jane">
+                            <input class="form-control" type="text" id="employeePreferredName" value=<?=$preferred_name?> required="required">
                         </div>
                     </div>
 
@@ -69,21 +90,21 @@ if ($connection->connect_errno) {
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone Number: </label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeePhoneNo" value="0412648235">
+                            <input class="form-control" type="text" id="employeePhoneNo" value=<?=$phone_number?> required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Home Address: </label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeeAddress" value="42 Mill Park Lake 3089">
+                            <input class="form-control" type="text" id="employeeAddress" value=<?=$address?> required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="employeeEmail" type="text" value="janesemail@gmail.com">
+                            <input class="form-control" id="employeeEmail" type="text" value=<?=$email?> required="required">
                         </div>
                     </div>
 
@@ -92,7 +113,7 @@ if ($connection->connect_errno) {
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-sm-3">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" class="btn btn-primary" value="Save Changes" name="submit">
                             <span></span>
                         </div>
                     </div>

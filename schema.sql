@@ -94,4 +94,4 @@ end
 ;;
 delimiter ;
 
-INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', '123 Test St', '1');
+INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `preferred_name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', 'Test Person', '123 Test St', '1');

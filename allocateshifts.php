@@ -25,6 +25,7 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
     <link rel="stylesheet" href="addshifts.css">
 
     <script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+    <script src="allocateshifts.js"></script>
 
     <script>
         $(function() {
@@ -40,7 +41,7 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 
     <div class="container" style="text-align: center;">
         <div class="margin-top">
-            <select name="shiftList" onchange="changeShift(this)">
+            <select id="shiftList" name="shiftList">
                 <option></option>
 
                 <?php
@@ -49,13 +50,13 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
                 if (!isset($_GET['id'])) {
                     $id = 0;
                 }
-                $shifts = $connection->query("select shift_id,location from shifts where not accepted=1")->fetch_all();
+                $shifts = $connection->query("select shift_id,location,date from shifts where not accepted=1")->fetch_all();
                 foreach ($shifts as $shift) {
                     // output data to the website
                     if ($shift[0] == $id) {
-                        echo "<option value='$shift[0]' selected>$shift[1]</option>";
+                        echo "<option value='$shift[0]' class='$shift[2]' selected>$shift[1]</option>";
                     } else {
-                        echo "<option value='$shift[0]'>$shift[1]</option>";
+                        echo "<option value='$shift[0]' class='$shift[2]'>$shift[1]</option>";
                     }
                 }
                 ?>
@@ -76,8 +77,7 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
                         </div>
 
 
-                        <div class="form-check" style="text-align: center;">
-
+                        <div class="list-group form-check" style="text-align: center;">
                             <?php
 
 
@@ -125,14 +125,14 @@ and id in (select employee_id from hour_limits where get_shift_hour(employee_id)
 
         ?>
     </form>
-    <script>
+    <!-- <script>
         // Change of drop-down box option
         function changeShift(choose) {
             if (choose.value != -1) {
                 window.location.replace("allocateshifts.php?id=" + choose.value)
             }
         }
-    </script>
+    </script> -->
 
 </body>
 

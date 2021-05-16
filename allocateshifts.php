@@ -72,33 +72,13 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
                     <div class="row gx-5">
                     </div>
                     <div class="col">
-                        <div style="text-align: center;">
+                        <div class="mb-5" style="text-align: center;">
                             <h3>Add Employees To Shift</h3>
                         </div>
 
 
                         <div class="list-group form-check" style="text-align: center;">
-                            <?php
-
-
-                            // find the employee who are unavailabilities
-                            $employees = $connection
-                                ->query("SELECT id,name FROM employee 
-where id not in (select employee_id from unavailabilities where date in (select date from shifts))
-and id in (select employee_id from hour_limits where get_shift_hour(employee_id)+8<=hour_limit)")
-                                ->fetch_all(MYSQLI_ASSOC);
-                            foreach ($employees as $employee) {
-                                // output data to the website
-                            ?>
-                                <div class="p-4 border bg-light"><input class="form-check-input" type="radio" name="employee" value="<?= $employee['id'] ?>" id="check<?= $employee['id'] ?>">
-                                    <label class="form-check-label" for="check<?= $employee['id'] ?>">
-                                        <?= $employee['name'] ?>
-                                    </label>
-                                </div>
-                            <?php
-                            }
-                            ?>
-
+                            <h5>Please select a shift.</h5>
                         </div>
                     </div>
                 </div>

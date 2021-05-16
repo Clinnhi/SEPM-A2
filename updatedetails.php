@@ -13,8 +13,8 @@ if ($connection->connect_errno) {
 }
 
 $user = $_SESSION['id'];
-$profile = $connection->query("select * from employee where id='$user'")->fetch_assoc();
-$hourLimit = $connection->query("select hour_limit from hour_limits where employee_id='$user'")->fetch_assoc();
+$profile = $connection->query("SELECT * FROM employee WHERE id='$user'")->fetch_assoc();
+$hourLimit = $connection->query("SELECT hour_limit FROM hour_limits WHERE employee_id='$user'")->fetch_assoc();
 
 
 $name = $profile['name'];
@@ -27,12 +27,18 @@ $email = $profile['email'];
 if (!empty($_POST['submit'])) {
 	$name = $_POST['employeeFullName'] ? $_POST['employeeFullName'] : $name;
     $preferred_name = $_POST['employeePreferredName'] ? $_POST['employeePreferredName'] : $preferred_name;
-    $phone_number = $_POST['employeePhoneNo'] ? $_POST['employeePhoneNumber'] : $phone_number;
+    $phone_number = $_POST['employeePhoneNumber'] ? $_POST['employeePhoneNumber'] : $phone_number;
 	$address = $_POST['employeeAddress'] ? $_POST['employeeAddress'] : $address;
-    $email = $_POST['employeeEmail'] ? $_POST['ememployeeEmail'] : $email;
+    $email = $_POST['employeeEmail'] ? $_POST['employeeEmail'] : $email;
 
-    $sql = $connection->prepare("UPDATE `Employee` (`name`, `preferred_name`, `phone_number`, `address`, `email`) VALUES (?, ?, ?, ?, ?)");
-    $sql->bind_param('sssss', $name, $preferred_name, $phone_number, $address, $email);
+    $array = [$name, $preferred_name, $phone_number, $address, $email, $user];
+    // var_dump($array);
+    $sql = $connection->prepare("UPDATE `employee` SET `name` = ?, `preferred_name` = ?, `phone_number`= ?, `address` = ?, `email` = ? WHERE id = ?");
+    $sql->bind_param('sssssi', $name, $preferred_name, $phone_number, $address, $email, $user);
+    if (!$sql->execute()) {
+        echo $sql->error;
+    }
+    $sql->close();
 }
 
 ?>
@@ -61,13 +67,13 @@ if (!empty($_POST['submit'])) {
             <div class="col-md personal-info">
                 <h3>Personal info</h3>
 
-                <form class="form-horizontal form-sm" role="form">
+                <form class="form-horizontal form-sm" role="form" action="" method="POST">
                     <div class="form-group">
                         <form method="post" action="">
                             <label class="col-lg-3 control-label">Full Name: </label>
                             <div class="col-sm-3">
                                 <!-- Preferred name goes into value -->
-                                <input class="form-control" type="text" id="employeeFullName" value=<?=$name?> required="required">
+                                <input class="form-control" type="text" name="employeeFullName" value="<?=$name?>" required="required">
                             </div>
                     </div>
 
@@ -75,14 +81,14 @@ if (!empty($_POST['submit'])) {
                         <label class="col-lg-3 control-label">Weekly Hour Limit: </label>
                         <div class="col-sm-3">
                             <!-- Weekly Hour Limits goes into 40 -->
-                            <input class="form-control" type="number" id="userHourLimit" value=<?= $hourLimit['hour_limit'] ?> disabled>
+                            <input class="form-control" type="number" name="userHourLimit" value="<?= $hourLimit['hour_limit'] ?>" disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Preferred Name: </label>
+                        <label class="col-lg-3 control-label">Preferred Name: <?= $preferred_name ?></label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeePreferredName" value=<?=$preferred_name?> required="required">
+                            <input class="form-control" type="text" name="employeePreferredName" value="<?=$preferred_name?>" required="required">
                         </div>
                     </div>
 
@@ -90,21 +96,21 @@ if (!empty($_POST['submit'])) {
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone Number: </label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeePhoneNo" value=<?=$phone_number?> required="required">
+                            <input class="form-control" type="text" name="employeePhoneNumber" value="<?=$phone_number?>" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Home Address: </label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="employeeAddress" value=<?=$address?> required="required">
+                            <input class="form-control" type="text" name="employeeAddress" value="<?=$address?>" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="employeeEmail" type="text" value=<?=$email?> required="required">
+                            <input class="form-control" name="employeeEmail" type="text" value="<?=$email?>" required="required">
                         </div>
                     </div>
 

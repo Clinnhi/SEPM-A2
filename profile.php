@@ -12,6 +12,10 @@ if ($connection->connect_errno) {
     exit();
 }
 
+$user = $_SESSION['id'];
+$profile = $connection->query("select * from employee where id='$user'")->fetch_assoc();
+$hourLimit = $connection->query("select hour_limit from hour_limits where employee_id='$user'")->fetch_assoc();
+
 
 
 ?>
@@ -43,11 +47,6 @@ if ($connection->connect_errno) {
     <div class="container mt-5">
         <h1 class="text-center">My Profile</h1>
         <hr>
-        <?php
-        $user = $_SESSION['id'];
-        $profile = $connection->query("select * from employee where id='$user'")->fetch_assoc();
-        $hourLimit = $connection->query("select hour_limit from hour_limits where employee_id='$user'")->fetch_assoc();
-        ?>
         <dl class="row">
             <dt class="col-sm-4"></dt>
             <dt class="col-sm-3">Full Name:</dt>

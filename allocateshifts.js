@@ -1,7 +1,6 @@
 $(function () {
 
     var addList = function (o) {
-        console.log(o.length);
         if (o && !(o instanceof Array)) {
             $(".list-group").html("");
             for (let key in o) {
@@ -29,17 +28,18 @@ $(function () {
                 alert('Error loading XML document');
             },
             success: function (data, status) {
-                console.log(data);
                 addList(data);
             }
         });
     }
 
     $("#shiftList").on('change', function () {
-        var inputDate;
+        var selected, inputDate, id;
         if ($(this).val()) {
-            inputDate = $(this).find('option:selected').attr('class');
-            console.log(inputDate);
+            selected = $(this).find('option:selected');
+            inputDate = selected.attr('class');
+            id = selected.val();
+            $(".idInput").val(id);
             ajaxFiltList(inputDate);
         } else {
             $(".list-group").html("<h5>Please select a shift.</h5>");

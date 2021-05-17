@@ -59,7 +59,7 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
         </div>
     </div>
 
-    <form action="" method="post">
+    <form class="reallocate-form" action="" method="post">
         <div class="mt-5">
             <div class="container">
 

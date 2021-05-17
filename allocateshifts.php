@@ -45,6 +45,15 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
                 <option></option>
 
                 <?php
+                //update shifts table, set employee who are selected, accepted = null
+                if (isset($_POST['employee']) && isset($_POST['id'])) {
+                    $employeeId = intval($_POST['employee']);
+                    $id = $_POST['id'];
+                    $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
+                    $sql->bind_param("ii", $employeeId, $id);
+                    $r = $sql->execute();
+                }
+
                 // $id = intval($_POST['id']);
                 // if (!isset($_POST['id'])) {
                 //     $id = 0;
@@ -89,20 +98,6 @@ $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
             </div>
         </div>
 
-
-        <?php
-
-
-        //update shifts table, set employee who are selected, accepted = null
-        if (isset($_POST['employee']) && isset($_POST['id'])) {
-            $employeeId = intval($_POST['employee']);
-            $id = $_POST['id'];
-            $sql = $connection->prepare("update shifts set employee_id=? ,accepted=null where shift_id=?");
-            $sql->bind_param("ii", $employeeId, $id);
-            $r = $sql->execute();
-        }
-
-        ?>
     </form>
     <!-- <script>
         // Change of drop-down box option

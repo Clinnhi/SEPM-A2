@@ -13,7 +13,7 @@ if ($connection->connect_errno) {
 }
 
 $user = $_SESSION['id'];
-$profile = $connection->query("SELECT * FROM employee WHERE id='$user'")->fetch_assoc();
+$profile = $connection->query("SELECT * FROM employee WHERE employee_id='$user'")->fetch_assoc();
 $hourLimit = $connection->query("SELECT hour_limit FROM hour_limits WHERE employee_id='$user'")->fetch_assoc();
 
 

@@ -3,7 +3,7 @@ create database SEPM;
 use SEPM;
 
 CREATE TABLE `Employee` (
-  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(8) NOT NULL,
   `phone_number` varchar(14) NOT NULL,
@@ -15,10 +15,10 @@ CREATE TABLE `Employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `Employee`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`employee_id`);
 
 ALTER TABLE `Employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 CREATE TABLE `Shifts` (
@@ -39,7 +39,7 @@ ALTER TABLE `Shifts`
   MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 ALTER TABLE `Shifts`
-  ADD CONSTRAINT `shifts_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
+  ADD CONSTRAINT `shifts_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`employee_id`);
 COMMIT;
 
 CREATE TABLE `Unavailabilities` (
@@ -56,7 +56,7 @@ ALTER TABLE `Unavailabilities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 ALTER TABLE `Unavailabilities`
-  ADD CONSTRAINT `unavailabilities_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
+  ADD CONSTRAINT `unavailabilities_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`employee_id`);
 COMMIT;
 
 CREATE TABLE `hour_limits` (
@@ -72,7 +72,7 @@ ALTER TABLE `hour_limits`
 
 
 ALTER TABLE `hour_limits`
-ADD CONSTRAINT `hour_limits_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`id`);
+ADD CONSTRAINT `hour_limits_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`employee_id`);
 COMMIT;
 
 delimiter ;;
@@ -89,9 +89,9 @@ delimiter ;
 
 delimiter ;;
 CREATE TRIGGER `add_hour_limit` AFTER INSERT ON `employee` FOR EACH ROW begin
-insert into hour_limits values (new.id, 40);
+insert into hour_limits values (new.employee_id, 40);
 end
 ;;
 delimiter ;
 
-INSERT INTO `Employee` (`id`, `email`, `password`, `phone_number`, `dob`, `name`, `preferred_name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', 'Test Person', '123 Test St', '1');
+INSERT INTO `Employee` (`employee_id`, `email`, `password`, `phone_number`, `dob`, `name`, `preferred_name`, `address`, `is_manager`) VALUES (NULL, 'test@gmail.com', 'Abc123!!', '0000000000', '2021-04-07', 'Test Tester', 'Test Person', '123 Test St', '1');

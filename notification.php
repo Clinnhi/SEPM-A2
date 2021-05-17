@@ -14,14 +14,16 @@ if ($connection->connect_errno) {
 }
 
 $result = $connection->query("SELECT * FROM `Shifts` WHERE `employee_id` = '$user' AND `accepted` IS Null");
-$shiftId = $_POST['shiftId'][0];
+
 
 if (!empty($_POST['acceptButton']) && !empty($_POST['shiftId'])) {
+    $shiftId = $_POST['shiftId'][0];
     $result = $connection->query("UPDATE `Shifts` SET `accepted` = 1 WHERE `shift_id` = $shiftId");
     $result = $connection->query("SELECT * FROM `Shifts` WHERE `employee_id` = '$user' AND `accepted` IS Null");
 }
 
 if (!empty($_POST['rejectButton']) && !empty($_POST['shiftId'])) {
+    $shiftId = $_POST['shiftId'][0];
     $result = $connection->query("UPDATE `Shifts` SET `accepted` = 0 WHERE `shift_id` = $shiftId");
     $result = $connection->query("SELECT * FROM `Shifts` WHERE `employee_id` = '$user' AND `accepted` IS Null");
 }

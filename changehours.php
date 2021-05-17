@@ -65,13 +65,13 @@ if ($connection->connect_errno) {
                             <!-- loop through database to retrieve employee and display below -->
                             <?php
                             //collect data from table 'employee'
-                            $results = $connection->query("SELECT id, name FROM `Employee`");
+                            $results = $connection->query("SELECT employee_id, name FROM `Employee`");
                             if ($results->num_rows > 0) {
                                 foreach ($results as $employee) {
-                                    if ($employee['id'] == $_GET['id']) {
-                                        echo "<option value='$employee[id]' selected>$employee[name]</option>";
+                                    if ($employee['employee_id'] == $_GET['employee_id']) {
+                                        echo "<option value='$employee[employee_id]' selected>$employee[name]</option>";
                                     } else {
-                                        echo "<option value='$employee[id]'>$employee[name]</option>";
+                                        echo "<option value='$employee[employee_id]'>$employee[name]</option>";
                                     }
                                 }
                             }
@@ -92,7 +92,7 @@ if ($connection->connect_errno) {
                             //collect data from table 'hour_limit'
                             $currentHour = null;
                             if (isset($_GET['id']) && $_GET['id'] != -1) {
-                                $id = intval($_GET['id']);
+                                $id = intval($_GET['employee_id']);
                                 //Get hour limit
                                 $result = $connection
                                     ->query("select hour_limit from hour_limits where employee_id='$id'")

@@ -12,7 +12,7 @@ if ($connection->connect_errno) {
     exit();
 }
 
-$results = $connection->query("SELECT id, name FROM `Employee`");
+$results = $connection->query("SELECT employee_id, name FROM `Employee`");
 
 if (isset($_POST['deactivate'])) {
     $deactivate = $_POST['deactivate'];
@@ -63,9 +63,9 @@ if (isset($_POST['deactivate'])) {
                     foreach ($results as $employee) {
                 ?>
                         <li class="list-group-item"><?= $employee['name'] ?> <div class="btn-group position-absolute top-0 end-0" role="group" aria-label="Basic example">
-                                <button type="submit" class="btn btn-dark" name="view" value="<?= $employee['id'] ?>">View Profile</button>
-                                <button type="submit" class="btn btn-secondary" name="edit" value="<?= $employee['id'] ?>">Edit Profile</button>
-                                <button type="submit" class="btn btn-primary" name="deactivate" value="<?= $employee['id'] ?>">Deactivate Account</button>
+                                <button type="submit" class="btn btn-dark" name="view" value="<?= $employee['employee_id'] ?>">View Profile</button>
+                                <button type="submit" class="btn btn-secondary" name="edit" value="<?= $employee['employee_id'] ?>">Edit Profile</button>
+                                <button type="submit" class="btn btn-primary" name="deactivate" value="<?= $employee['employee_id'] ?>">Deactivate Account</button>
                             </div>
                         </li>
                     <?php

@@ -11,7 +11,7 @@ if ($connection->connect_errno) {
     echo "Failed to connect to MySQL: " . $connection->connect_error;
     exit();
 }
-$results = $connection->query("SELECT id, name FROM `Employee`");
+$results = $connection->query("SELECT employee_id, name FROM `Employee`");
 $results1 = $connection->query("SELECT date, employee_id FROM `Unavailabilities`");
 
 $na_id = array();
@@ -26,8 +26,8 @@ if ($results1->num_rows > 0) {
 $filter_result = array();
 if ($results->num_rows > 0) {
     foreach ($results as $employee) {
-        if (!in_array($employee['id'], $na_id)) {
-            $filter_result[$employee['id']] = $employee['name'];
+        if (!in_array($employee['employee_id'], $na_id)) {
+            $filter_result[$employee['employee_id']] = $employee['name'];
         }
     }
 }

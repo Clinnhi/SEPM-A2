@@ -91,11 +91,12 @@ if ($connection->connect_errno) {
                             <?php
                             //collect data from table 'hour_limit'
                             $currentHour = null;
-                            if (isset($_GET['id']) && $_GET['id'] != -1) {
-                                $id = intval($_GET['employee_id']);
+                            $employeeId = isset($_GET['employee_id'])? intval($_GET['employee_id']) : -1;
+                            if (isset($_GET['employee_id']) && $_GET['employee_id'] != -1) {
+
                                 //Get hour limit
                                 $result = $connection
-                                    ->query("select hour_limit from hour_limits where employee_id='$id'")
+                                    ->query("select hour_limit from hour_limits where employee_id='$employeeId'")
                                     ->fetch_all(MYSQLI_ASSOC)[0];
 
                                 //Output
@@ -137,7 +138,7 @@ if ($connection->connect_errno) {
                 <!-- Code to check if staff is eligible to have their hourly limits increased -->
                 <?php
                 //check data correctly
-                if (isset($_POST['hoursNumber']) && isset($_GET['id']) && $_GET['id'] != -1) {
+                if (isset($_POST['hoursNumber']) && isset($_GET['employee_id']) && $_GET['employee_id'] != -1) {
                     $hoursNumber = $_POST['hoursNumber'];
                     $hours = $currentHour + $hoursNumber;
 
@@ -152,9 +153,8 @@ if ($connection->connect_errno) {
                     } else {
                         //update data
 
-                        $id = intval($_GET['id']);
                         $sql = $connection->prepare("replace into hour_limits values(?,?)");
-                        $sql->bind_param("ii", $id, $hours);
+                        $sql->bind_param("ii", $employeeId, $hours);
                         $sql->execute();
                     ?>
                         <div class="alert alert-success" role="alert">
@@ -188,7 +188,7 @@ if ($connection->connect_errno) {
         // Change of drop-down box option
         function changeEmployee(choose) {
             if (choose.value != -1) {
-                window.location.replace("changehours.php?id=" + choose.value)
+                window.location.replace("changehours.php?employee_id=" + choose.value)
             }
         }
     </script>

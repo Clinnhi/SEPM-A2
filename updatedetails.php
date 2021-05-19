@@ -31,7 +31,7 @@ if (!empty($_POST['submit'])) {
 	$address = $_POST['employeeAddress'] ? $_POST['employeeAddress'] : $address;
     $email = $_POST['employeeEmail'] ? $_POST['employeeEmail'] : $email;
 
-    $sql = $connection->prepare("UPDATE `employee` SET `name` = ?, `preferred_name` = ?, `phone_number`= ?, `address` = ?, `email` = ? WHERE id = ?");
+    $sql = $connection->prepare("UPDATE `employee` SET `name` = ?, `preferred_name` = ?, `phone_number`= ?, `address` = ?, `email` = ? WHERE employee_id = ?");
     $sql->bind_param('sssssi', $name, $preferred_name, $phone_number, $address, $email, $user);
     if (!$sql->execute()) {
         echo $sql->error;

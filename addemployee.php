@@ -96,7 +96,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Weekly Hour Limit</label>
-          <input type="text" class="form-control" name="employeeLimit" required>
+          <input type="text" class="form-control" name="employeeLimit" required value = "40" disabled>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="optradio" id="shiftManagerOption" value="manager" checked>

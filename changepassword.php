@@ -20,7 +20,7 @@ $password = $profile['password'];
 if (!empty($_POST['submit'])) {
     if ($password == $_POST['oldPassword'] && $_POST['newPassword'] == $_POST['confirmNewPassword']){
         $newPassword = $_POST['newPassword'];
-        $sql = $connection->prepare("UPDATE `employee` SET `password` = ? WHERE id = ?");
+        $sql = $connection->prepare("UPDATE `employee` SET `password` = ? WHERE employee_id = ?");
         $sql->bind_param('ss', $newPassword, $user);
         if (!$sql->execute()) {
             echo $sql->error;

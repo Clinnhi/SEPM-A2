@@ -14,6 +14,7 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
   $name = $_POST['employeeFullName'];
   $address = $_POST['employeeAddress'];
   $is_manager = $_POST['optradio'] == 'manager' ? 1 : 0;
+  $preferred_name = $_POST['employeePreferredName'];
 
   $connection = new mysqli($host, $dbUsername, $dbPassword, $dbName);
   if ($connection->connect_errno) {
@@ -21,8 +22,8 @@ if (!empty($_POST['employeeEmail']) && !empty($_POST['employeePassword']) && !em
     exit();
   }
 
-  $sql = $connection->prepare("INSERT INTO `Employee` (`email`, `password`, `phone_number`, `dob`, `name`, `address`, `is_manager`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-  $sql->bind_param('ssssssi', $email, $password, $phone_number, $dob, $name, $address, $is_manager);
+  $sql = $connection->prepare("INSERT INTO `Employee` (`email`, `password`, `phone_number`, `dob`, `name`, `preferred_name`, `address`, `is_manager`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  $sql->bind_param('sssssssi', $email, $password, $phone_number, $dob, $name, $preferred_name, $address, $is_manager);
 
   if (!$sql->execute()) {
     echo $sql->error;
